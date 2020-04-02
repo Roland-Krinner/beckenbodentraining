@@ -1,0 +1,270 @@
+@import 'colors';
+
+.shadow-dark-sm {
+	box-shadow: 0 2px 4px 0 rgba(14, 30, 37, 0.12);
+}
+
+.normalize-first-p {
+	p:first-child {
+		margin-bottom: 0 !important;
+	}
+}
+
+.normalize-last-p {
+	p:last-child {
+		margin-bottom: 0 !important;
+	}
+}
+
+.navbar-dark .navbar-nav .nav-item .nav-link.active,
+.navbar-dark .navbar-nav .nav-item .nav-link:focus,
+.navbar-dark .navbar-nav .nav-item .nav-link:hover {
+	@media (max-width: 991.98px) {
+		color: $successBase !important;
+	}
+}
+
+.nav-link {
+	@media (min-width: 992px) {
+		&:hover span::before,
+		&.active span::before {
+			background-color: $successBase;
+		}
+	}
+}
+
+.two-col-header .two-col-header-item {
+	@media (min-width: 1920px) {
+		height: 75vh;
+		min-height: 628px;
+	}
+}
+
+.two-col-header-item--text {
+	@media (min-width: 1920px) {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+}
+
+.pt-xxl-0,
+.py-xxl-0 {
+	@media (min-width: 1920px) {
+		padding-top: 0 !important;
+	}
+}
+.pb-xxl-0,
+.py-xxl-0 {
+	@media (min-width: 1920px) {
+		padding-bottom: 0 !important;
+	}
+}
+
+.pt-xxl-1,
+.py-xxl-1 {
+	@media (min-width: 1920px) {
+		padding-top: 0.25rem !important;
+	}
+}
+.pb-xxl-1,
+.py-xxl-1 {
+	@media (min-width: 1920px) {
+		padding-bottom: 0.25rem !important;
+	}
+}
+
+.pt-xxl-2,
+.py-xxl-2 {
+	@media (min-width: 1920px) {
+		padding-top: 0.5rem !important;
+	}
+}
+.pb-xxl-2,
+.py-xxl-2 {
+	@media (min-width: 1920px) {
+		padding-bottom: 0.5rem !important;
+	}
+}
+
+.pt-xxl-3,
+.py-xxl-3 {
+	@media (min-width: 1920px) {
+		padding-top: 0.75rem !important;
+	}
+}
+.pb-xxl-3,
+.py-xxl-3 {
+	@media (min-width: 1920px) {
+		padding-bottom: 0.75rem !important;
+	}
+}
+
+.pt-xxl-4,
+.py-xxl-4 {
+	@media (min-width: 1920px) {
+		padding-top: 1rem !important;
+	}
+}
+.pb-xxl-4,
+.py-xxl-4 {
+	@media (min-width: 1920px) {
+		padding-bottom: 1rem !important;
+	}
+}
+
+.pt-xxl-5,
+.py-xxl-5 {
+	@media (min-width: 1920px) {
+		padding-top: 1.5rem !important;
+	}
+}
+.pb-xxl-5,
+.py-xxl-5 {
+	@media (min-width: 1920px) {
+		padding-bottom: 1.5rem !important;
+	}
+}
+
+.pt-xxl-6,
+.py-xxl-6 {
+	@media (min-width: 1920px) {
+		padding-top: 2rem !important;
+	}
+}
+.pb-xxl-6,
+.py-xxl-6 {
+	@media (min-width: 1920px) {
+		padding-bottom: 2rem !important;
+	}
+}
+
+.pt-xxl-7,
+.py-xxl-7 {
+	@media (min-width: 1920px) {
+		padding-top: 2.5rem !important;
+	}
+}
+.pb-xxl-7,
+.py-xxl-7 {
+	@media (min-width: 1920px) {
+		padding-bottom: 2.5rem !important;
+	}
+}
+
+.pt-xxl-8,
+.py-xxl-8 {
+	@media (min-width: 1920px) {
+		padding-top: 3rem !important;
+	}
+}
+.pb-xxl-8,
+.py-xxl-8 {
+	@media (min-width: 1920px) {
+		padding-bottom: 3rem !important;
+	}
+}
+
+.pt-xxl-9,
+.py-xxl-9 {
+	@media (min-width: 1920px) {
+		padding-top: 4rem !important;
+	}
+}
+.pb-xxl-9,
+.py-xxl-9 {
+	@media (min-width: 1920px) {
+		padding-bottom: 4rem !important;
+	}
+}
+
+.pt-xxl-10,
+.py-xxl-10 {
+	@media (min-width: 1920px) {
+		padding-top: 5rem !important;
+	}
+}
+.pb-xxl-10,
+.py-xxl-10 {
+	@media (min-width: 1920px) {
+		padding-bottom: 5rem !important;
+	}
+}
+
+.pt-xxl-11,
+.py-xxl-11 {
+	@media (min-width: 1920px) {
+		padding-top: 6rem !important;
+	}
+}
+.pb-xxl-11,
+.py-xxl-11 {
+	@media (min-width: 1920px) {
+		padding-bottom: 6rem !important;
+	}
+}
+
+.pt-xxl-12,
+.py-xxl-12 {
+	@media (min-width: 1920px) {
+		padding-top: 8rem !important;
+	}
+}
+.pb-xxl-12,
+.py-xxl-12 {
+	@media (min-width: 1920px) {
+		padding-bottom: 8rem !important;
+	}
+}
+
+.pt-xxl-13,
+.py-xxl-13 {
+	@media (min-width: 1920px) {
+		padding-top: 10rem !important;
+	}
+}
+.pb-xxl-13,
+.py-xxl-13 {
+	@media (min-width: 1920px) {
+		padding-bottom: 10rem !important;
+	}
+}
+
+.pt-xxl-14,
+.py-xxl-14 {
+	@media (min-width: 1920px) {
+		padding-top: 12rem !important;
+	}
+}
+.pb-xxl-14,
+.py-xxl-14 {
+	@media (min-width: 1920px) {
+		padding-bottom: 12rem !important;
+	}
+}
+
+.pt-xxl-15,
+.py-xxl-15 {
+	@media (min-width: 1920px) {
+		padding-top: 16rem !important;
+	}
+}
+.pb-xxl-15,
+.py-xxl-15 {
+	@media (min-width: 1920px) {
+		padding-bottom: 16rem !important;
+	}
+}
+
+.pt-xxl-16,
+.py-xxl-16 {
+	@media (min-width: 1920px) {
+		padding-top: 25rem !important;
+	}
+}
+.pb-xxl-16,
+.py-xxl-16 {
+	@media (min-width: 1920px) {
+		padding-bottom: 25rem !important;
+	}
+}
