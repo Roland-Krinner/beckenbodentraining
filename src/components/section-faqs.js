@@ -19,10 +19,10 @@ const FaqItem = ({ q, a, index }) => {
 	)
 }
 
-const FAQs = () => {
+export default () => {
 	const data = useStaticQuery(graphql`
 		query {
-			allContentfulStartseite {
+			allContentfulSeiteStartseite {
 				edges {
 					node {
 						faQsText {
@@ -42,10 +42,11 @@ const FAQs = () => {
 			}
 		}
 	`)
-	const faQsTextJSON = data.allContentfulStartseite.edges[0].node.faQsText.json
-	const faqsList = data.allContentfulStartseite.edges[0].node.faQsListe
+	const faQsTextJSON = data.allContentfulSeiteStartseite.edges[0].node.faQsText.json
+	const faqsList = data.allContentfulSeiteStartseite.edges[0].node.faQsListe
 	const faqsLength = faqsList.length
-	const kontaktBoxJSON = data.allContentfulStartseite.edges[0].node.kontaktBox.json
+	const kontaktBoxJSON = data.allContentfulSeiteStartseite.edges[0].node.kontaktBox.json
+	
 	return (
 		<Section data={{ classes: 'bg-white' }}>
 			<Container>
@@ -85,5 +86,3 @@ const FAQs = () => {
 		</Section>
 	)
 }
-
-export default FAQs

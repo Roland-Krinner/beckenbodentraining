@@ -4,10 +4,10 @@ import { useStaticQuery, graphql, Link } from 'gatsby'
 import { SVG } from './local-components'
 import Styles from './footer.module.scss'
 
-const Footer = ({ pageInfo: { pageType } }) => {
+export default ({ pageInfo: { pageType } }) => {
 	const data = useStaticQuery(graphql`
 		query {
-			allContentfulMetadaten {
+			allContentfulDatenMetadaten {
 				edges {
 					node {
 						brandIcon {
@@ -24,7 +24,7 @@ const Footer = ({ pageInfo: { pageType } }) => {
 					}
 				}
 			}
-			allContentfulKontaktDaten {
+			allContentfulDatenKontaktdaten {
 				edges {
 					node {
 						name
@@ -39,17 +39,17 @@ const Footer = ({ pageInfo: { pageType } }) => {
 			}
 		}
 	`)
-	const svg = data.allContentfulMetadaten.edges[0].node.brandIcon.svg
-	const alt = data.allContentfulMetadaten.edges[0].node.brandIcon.title
-	const file = data.allContentfulMetadaten.edges[0].node.brandIcon.file
+	const svg = data.allContentfulDatenMetadaten.edges[0].node.brandIcon.svg
+	const alt = data.allContentfulDatenMetadaten.edges[0].node.brandIcon.title
+	const file = data.allContentfulDatenMetadaten.edges[0].node.brandIcon.file
 
-	const name = data.allContentfulKontaktDaten.edges[0].node.name
-	const strasse = data.allContentfulKontaktDaten.edges[0].node.strasse
-	const ort = data.allContentfulKontaktDaten.edges[0].node.ort
-	const telefon = data.allContentfulKontaktDaten.edges[0].node.telefon
-	const eMail = data.allContentfulKontaktDaten.edges[0].node.eMail
-	const websiteName = data.allContentfulKontaktDaten.edges[0].node.websiteName
-	const websiteUrl = data.allContentfulKontaktDaten.edges[0].node.websiteUrl
+	const name = data.allContentfulDatenKontaktdaten.edges[0].node.name
+	const strasse = data.allContentfulDatenKontaktdaten.edges[0].node.strasse
+	const ort = data.allContentfulDatenKontaktdaten.edges[0].node.ort
+	const telefon = data.allContentfulDatenKontaktdaten.edges[0].node.telefon
+	const eMail = data.allContentfulDatenKontaktdaten.edges[0].node.eMail
+	const websiteName = data.allContentfulDatenKontaktdaten.edges[0].node.websiteName
+	const websiteUrl = data.allContentfulDatenKontaktdaten.edges[0].node.websiteUrl
 
 	const headline = 'font-weight-bold text-uppercase text-white mt-6'
 	const listItem = 'text-white-70'
@@ -67,11 +67,6 @@ const Footer = ({ pageInfo: { pageType } }) => {
 							<div className={`${Styles.svgWrapper} mt-6`}>
 								<SVG svg={svg} file={file} alt={alt} />
 							</div>
-							{/* <div className={Styles.svgWrapper}>
-								<SVG svg={svg} file={file} alt={alt} />
-							</div>
-							<div className={`${listItemWrapper}`}>Sandra Läuger</div>
-							<div className={`${listItemWrapper}`}>Beckenbodentraining</div> */}
 						</div>
 					</Col>
 					<Col xs={12} md={6} lg={4} xl={3}>
@@ -121,9 +116,9 @@ const Footer = ({ pageInfo: { pageType } }) => {
 							<h6 className={`${headline}`}>Kontakt</h6>
 							<p className={`${listItemWrapper}`}>
 								<i className="fe fe-smartphone mr-2"></i>
-								{/* <a href={`tel:${phonePlain}`} className={`${listItem}`}>
-									{phone}
-								</a> */}
+								<a href={`tel:${telefon}`} className={`${listItem}`}>
+									{telefon}
+								</a>
 								<br />
 								<i className="fe fe-mail mr-2"></i>
 								<a href={`mailto:${eMail}`} className={`${listItem}`}>
@@ -132,60 +127,12 @@ const Footer = ({ pageInfo: { pageType } }) => {
 								<br />
 								<i className="fe fe-globe mr-2"></i>
 								<a href={websiteUrl} target="_blank" rel="noopener noreferrer" className={`${listItem}`}>
-									{websiteName} 
+									{websiteName}
 								</a>
 							</p>
 						</div>
 					</Col>
 				</Row>
-
-				{/* <Row className="justify-content-center">
-					<Col xs={3} className="mb-10 d-none d-md-block">
-						<SVG svg={svg} file={file} alt={alt} />
-					</Col>
-				</Row>
-				<Row>
-					<Col xs={12} md={6} lg={4} className="d-lg-flex justify-content-center border-right border-white">
-						<div>
-							<h6 className={headline}>Inhalt</h6>
-							<div className={`${listItemWrapper}`}>
-								<Link to="/" className={`${listItem}`}>
-									Startseite
-								</Link>
-							</div>
-							<div className={`${listItemWrapper}`}>
-								<Link to="/kurse" className={`${listItem}`}>
-									Kursangebot
-								</Link>
-							</div>
-							<div className={`${listItemWrapper}`}>
-								<Link to="/touren" className={`${listItem}`}>
-									Leistungen
-								</Link>
-							</div>
-							<div className={`${listItemWrapper}`}>
-								<Link to="/profil" className={`${listItem}`}>
-									Profil
-								</Link>
-							</div>
-							<div className={`${listItemWrapper}`}>
-								<Link to="/kontakt" className={`${listItem}`}>
-									Kontakt
-								</Link>
-							</div>
-						</div>
-					</Col>
-					<Col xs={12} md={6} lg={4} className="d-lg-flex justify-content-center border-right border-white">
-						<div>
-							<h6 className={headline}>Adresse</h6>
-						</div>
-					</Col>
-					<Col xs={12} md={6} lg={4} className="d-lg-flex justify-content-center">
-						<div>
-							<h6 className={headline}>Kontakt</h6>
-						</div>
-					</Col>
-				</Row> */}
 			</Container>
 			<Container fluid className="py-5 bg-black">
 				<Row>
@@ -204,5 +151,3 @@ const Footer = ({ pageInfo: { pageType } }) => {
 		</footer>
 	)
 }
-
-export default Footer

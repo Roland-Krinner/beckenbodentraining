@@ -8,7 +8,7 @@ import Styles from './header.module.scss'
 const NavContent = ({ pageInfo }) => {
 	const data = useStaticQuery(graphql`
 		query {
-			allContentfulMetadaten {
+			allContentfulDatenMetadaten {
 				edges {
 					node {
 						brandLogo {
@@ -27,9 +27,10 @@ const NavContent = ({ pageInfo }) => {
 			}
 		}
 	`)
-	const svg = data.allContentfulMetadaten.edges[0].node.brandLogo.svg
-	const alt = data.allContentfulMetadaten.edges[0].node.brandLogo.title
-	const file = data.allContentfulMetadaten.edges[0].node.brandLogo.file
+	const svg = data.allContentfulDatenMetadaten.edges[0].node.brandLogo.svg
+	const alt = data.allContentfulDatenMetadaten.edges[0].node.brandLogo.title
+	const file = data.allContentfulDatenMetadaten.edges[0].node.brandLogo.file
+
 	return (
 		<>
 			<Link to="/" className={Styles.brand}>
@@ -49,16 +50,9 @@ const NavContent = ({ pageInfo }) => {
 						</Link>
 					</Nav.Item>
 					<Nav.Item className={Styles.navItem}>
-						<Link to="/kurse">
-							<Nav.Link as="span" eventKey="kurse" className={Styles.navLink}>
+						<Link to="/kursangebot">
+							<Nav.Link as="span" eventKey="kursangebot" className={Styles.navLink}>
 								<span>Kursangebot</span>
-							</Nav.Link>
-						</Link>
-					</Nav.Item>
-					<Nav.Item className={Styles.navItem}>
-						<Link to="/touren">
-							<Nav.Link as="span" eventKey="touren" className={Styles.navLink}>
-								<span>Leistungen</span>
 							</Nav.Link>
 						</Link>
 					</Nav.Item>
@@ -82,7 +76,7 @@ const NavContent = ({ pageInfo }) => {
 	)
 }
 
-const Header = ({ pageInfo }) => {
+export default ({ pageInfo }) => {
 	return (
 		<header>
 			<Navbar bg="dark" expand="lg" variant="dark" collapseOnSelect className={Styles.navbar}>
@@ -91,5 +85,3 @@ const Header = ({ pageInfo }) => {
 		</header>
 	)
 }
-
-export default Header

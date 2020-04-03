@@ -5,10 +5,10 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { defaultTextOptions, infoBoxTextOptions } from './format-options'
 // import { Section } from './local-components'
 
-const Intro = () => {
+export default () => {
 	const data = useStaticQuery(graphql`
 		query {
-			allContentfulStartseite {
+			allContentfulSeiteStartseite {
 				edges {
 					node {
 						intro {
@@ -25,9 +25,9 @@ const Intro = () => {
 			}
 		}
 	`)
-	const introJSON = data.allContentfulStartseite.edges[0].node.intro.json
-	const infoBox1JSON = data.allContentfulStartseite.edges[0].node.infoBox1.json
-	const infoBox2JSON = data.allContentfulStartseite.edges[0].node.infoBox2.json
+	const introJSON = data.allContentfulSeiteStartseite.edges[0].node.intro.json
+	const infoBox1JSON = data.allContentfulSeiteStartseite.edges[0].node.infoBox1.json
+	const infoBox2JSON = data.allContentfulSeiteStartseite.edges[0].node.infoBox2.json
 
 	return (
 		<section className="pt-8 pt-md-12 normalize-last-p bg-gray-200">
@@ -63,5 +63,3 @@ const Intro = () => {
 		</section>
 	)
 }
-
-export default Intro

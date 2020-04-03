@@ -5,10 +5,10 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { heroTextOptions } from './format-options'
 import Flickity from './flickity'
 
-const Hero = () => {
+export default () => {
 	const data = useStaticQuery(graphql`
 		query {
-			allContentfulStartseite {
+			allContentfulSeiteStartseite {
 				edges {
 					node {
 						hero {
@@ -31,8 +31,8 @@ const Hero = () => {
 			}
 		}
 	`)
-	const heroTextJSON = data.allContentfulStartseite.edges[0].node.hero.text.json
-	const heroSlides = data.allContentfulStartseite.edges[0].node.hero.bilder
+	const heroTextJSON = data.allContentfulSeiteStartseite.edges[0].node.hero.text.json
+	const heroSlides = data.allContentfulSeiteStartseite.edges[0].node.hero.bilder
 
 	const MobileImages = () => {
 		return heroSlides.map((slide, idx) => {
@@ -82,5 +82,3 @@ const Hero = () => {
 		</section>
 	)
 }
-
-export default Hero

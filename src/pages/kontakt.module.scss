@@ -1,0 +1,29 @@
+@import '../scss/mixins';
+
+.form-card-col {
+	// xs
+	@media (max-width: 320px) {
+		margin-top: 1rem !important;
+		padding-right: 0.5rem !important;
+		padding-left: 0.5rem !important;
+	}
+}
+
+.card-body {
+	@include cardBodyPaddingDefault;
+	// xs
+	@media (max-width: 320px) {
+		@include cardBodyPaddingXS;
+	}
+	//md
+	@media (min-width: 768px) {
+		@include cardBodyPaddingMD;
+	}
+}
+
+.card-body-div {
+	// xs
+	@media (max-width: 320px) {
+		margin-top: 0 !important;
+	}
+}

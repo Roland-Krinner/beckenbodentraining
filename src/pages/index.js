@@ -4,12 +4,11 @@ import Layout from '../components/layout'
 import SectionHero from '../components/section-hero'
 import SectionIntro from '../components/section-intro'
 import SectionProfile from '../components/section-profile'
-import SectionCourses from '../components/section-courses'
-// import SectionTours from '../components/section-tours'
-// import SectionQuotes from '../components/section-quotes'
+import SectionInfo from '../components/section-info'
+import SectionMap from '../components/section-map'
 import SectionFAQs from '../components/section-faqs'
 
-const IndexPage = props => {
+export default props => {
 	return (
 		<Layout pageInfo={{ pageName: 'startseite', pageType: 'homePage' }}>
 			{/* <Head title="" props={props} /> */}
@@ -17,14 +16,10 @@ const IndexPage = props => {
 			<main>
 				<SectionIntro />
 				<SectionProfile />
-				<SectionCourses />
-				{/*
-				<SectionTours />
-				<SectionQuotes />*/}
+				<SectionInfo />
+				<SectionMap />
 				<SectionFAQs />
 			</main>
 		</Layout>
 	)
 }
-
-export default IndexPage

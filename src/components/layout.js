@@ -1,21 +1,19 @@
 import React from 'react'
 import Header from '../components/header'
 import Footer from '../components/footer'
-// import Notification from '../components/notification'
-import layoutStyles from './layout.module.scss'
+import Notification from '../components/notification'
+import Styles from './layout.module.scss'
 import '../scss/default.scss'
 
-const Layout = ({ children, pageInfo }) => {
+export default ({ children, pageInfo }) => {
 	return (
-		<div className={layoutStyles.container}>
-			<div className={`${layoutStyles.content} xxx__bg-light`}>
+		<div className={Styles.container}>
+			<div className={Styles.content}>
 				<Header pageInfo={pageInfo} />
 				{children}
 			</div>
 			<Footer pageInfo={pageInfo} />
-			{/*<Notification /> */}
+			<Notification />
 		</div>
 	)
 }
-
-export default Layout

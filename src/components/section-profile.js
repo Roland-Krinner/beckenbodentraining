@@ -24,10 +24,10 @@ const imgOptions = {
 	},
 }
 
-const Profile = () => {
+export default () => {
 	const data = useStaticQuery(graphql`
 		query {
-			allContentfulStartseite {
+			allContentfulSeiteStartseite {
 				edges {
 					node {
 						profil {
@@ -38,7 +38,7 @@ const Profile = () => {
 			}
 		}
 	`)
-	const profilJSON = data.allContentfulStartseite.edges[0].node.profil.json
+	const profilJSON = data.allContentfulSeiteStartseite.edges[0].node.profil.json
 
 	return (
 		<>
@@ -66,5 +66,3 @@ const Profile = () => {
 		</>
 	)
 }
-
-export default Profile

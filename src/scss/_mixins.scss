@@ -1,0 +1,41 @@
+@mixin heroGradient {
+	background: linear-gradient(to right, rgba(10, 26, 98, 0.8), rgba(10, 26, 98, 0.4) 86%);
+}
+
+@mixin borderRadius {
+	border-radius: 0.2353rem !important;
+}
+
+/* overview and detail pages! */
+@mixin cardImgTopDiv {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	padding: 0 0 1rem 1.412rem;
+	@include heroGradient;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+}
+
+@mixin cardImgTopDivPaddingXS {
+	padding: 0 0 1rem 1.125rem !important;
+}
+
+@mixin cardImgTopDivPaddingMD {
+	padding: 0 0 1rem 2rem !important;
+}
+
+@mixin cardBodyPaddingXS {
+	padding: 1.5rem 1.125rem 1.125rem 1.125rem !important;
+}
+
+@mixin cardBodyPaddingMD {
+	padding: 2rem !important;
+}
+
+@mixin cardBodyPaddingDefault {
+	padding: 1.765rem 1.412rem 1.412rem 1.412rem;
+}

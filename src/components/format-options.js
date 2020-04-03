@@ -1,55 +1,59 @@
 import React from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
+import { useStaticQuery, graphql, Link } from 'gatsby'
 import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types'
-import { CTA } from './local-components'
-// import { utils } from '../utils'
-// const textMuted = utils.getColor('textMuted')
+import { CTA, CtaExternal } from './local-components'
 
 const BrandData = ({ data: { searchStr, customClasses } }) => {
 	const data = useStaticQuery(graphql`
 		query {
-			allContentfulKontaktDaten {
+			allContentfulDatenKontaktdaten {
 				edges {
 					node {
 						name
 						strasse
 						ort
 						telefon
+						land
 						eMail
 					}
 				}
 			}
 		}
 	`)
-	const name = data.allContentfulKontaktDaten.edges[0].node.name
-	const strasse = data.allContentfulKontaktDaten.edges[0].node.strasse
-	const ort = data.allContentfulKontaktDaten.edges[0].node.ort
-	const telefon = data.allContentfulKontaktDaten.edges[0].node.telefon
-	const eMail = data.allContentfulKontaktDaten.edges[0].node.eMail
+	const name = data.allContentfulDatenKontaktdaten.edges[0].node.name
+	const strasse = data.allContentfulDatenKontaktdaten.edges[0].node.strasse
+	const ort = data.allContentfulDatenKontaktdaten.edges[0].node.ort
+	const land = data.allContentfulDatenKontaktdaten.edges[0].node.land
+	const telefon = data.allContentfulDatenKontaktdaten.edges[0].node.telefon
+	const eMail = data.allContentfulDatenKontaktdaten.edges[0].node.eMail
 
 	const paragraphClasses = customClasses ? customClasses : `text-muted`
 
-	if (searchStr === '$$contactData$$') {
-		return <>{/* <p className={`${paragraphClasses}`}>
+	if (searchStr === '$$kontaktDaten$$') {
+		return (
+			<>
+				<p className={`${paragraphClasses}`}>
 					{name}
 					<br />
-					{street}
+					{strasse}
 					<br />
-					{city}
+					{ort}
 					<br />
-					{country}
+					{land}
 				</p>
 				<p className={`${paragraphClasses}`}>
 					Telefon:{' '}
-					<a href={`tel:${phonePlain}`} className={`text-success text-decoration-none`}>
-						{phone}
+					<a href={`tel:${telefon}`} className={`text-success text-decoration-none`}>
+						{telefon}
 					</a>
 					<br />
 					E-Mail:{' '}
 					<a href={`mailto:${eMail}`} className={`text-success text-decoration-none`}>
 						{eMail}
 					</a>
-				</p> */}</>
+				</p>
+			</>
+		)
 	} else if (searchStr === '$$imprintAddress$$') {
 		return <p className={`${paragraphClasses}`}>{/* {name}
 				<br />
@@ -77,7 +81,10 @@ const BrandData = ({ data: { searchStr, customClasses } }) => {
 	} else if (searchStr === '$$telefon$$') {
 		return (
 			<p className={`${paragraphClasses}`}>
-				{telefon.map((number, idx, self) => {
+				<a href={`tel:${telefon}`} className="text-reset">
+					{telefon}
+				</a>
+				{/* {telefon.map((number, idx, self) => {
 					return idx < self.length - 1 ? (
 						<>
 							<a href={`tel:${number}`} className="text-reset" key={idx}>
@@ -90,7 +97,7 @@ const BrandData = ({ data: { searchStr, customClasses } }) => {
 							{number}
 						</a>
 					)
-				})}
+				})} */}
 			</p>
 		)
 	} else if (searchStr === '$$email$$') {
@@ -123,15 +130,14 @@ const heroTextOptions = {
 
 const defaultTextOptions = {
 	renderNode: {
-		[BLOCKS.HEADING_1]: (node, children) => <h1 className={`mb-0 mb-sm-1`}>{children}</h1>,
+		[BLOCKS.HEADING_1]: (node, children) => <h1 className={`mb-0 xxx__mb-sm-1`}>{children}</h1>,
 		[BLOCKS.HEADING_6]: (node, children) => <p className={`font-size-lg mb-4 mb-lg-5 text-muted`}>{children}</p>,
 		[BLOCKS.HEADING_3]: (node, children) => <h3 className={`font-weight-bold`}>{children}</h3>,
 		[BLOCKS.PARAGRAPH]: (node, children) => {
 			if (node.content.length === 1 && node.content[0].value === '') {
 				return ''
 			} else if (node.content[0].value.indexOf('$$') !== -1) {
-				return ''
-				// return <BrandData data={{ searchStr: node.content[0].value }} />
+				return <BrandData data={{ searchStr: node.content[0].value }} />
 			} else {
 				return <p className={`font-size-lg text-muted`}>{children}</p>
 			}
@@ -140,7 +146,7 @@ const defaultTextOptions = {
 		[BLOCKS.UL_LIST]: (node, children) => <div className={`pb-5`}>{children}</div>,
 		[BLOCKS.LIST_ITEM]: (node, children) => (
 			<div className={`d-flex list-item`}>
-				<div className={`badge badge-rounded-circle badge-secondary mt-1 mr-4`}>
+				<div className={`badge badge-rounded-circle badge-success-soft mt-1 mr-4`}>
 					<i className={`fe fe-check`}></i>
 				</div>
 				<span className={`mb-2`}>{children}</span>
@@ -215,11 +221,12 @@ const faqTextOptions = {
 			if (node.data.uri && node.data.uri.startsWith('/')) {
 				return <CTA data={{ to: node.data.uri, classes: '' }}>{children}</CTA>
 			} else {
-				return (
-					<a href={node.data.uri} target="_blank" rel="noopener noreferrer" className={`text-success text-decoration-none`}>
-						{children}
-					</a>
-				)
+				return <CtaExternal data={{ to: node.data.uri, classes: '' }}>{children}</CtaExternal>
+				// return (
+				// 	<a href={node.data.uri} target="_blank" rel="noopener noreferrer" className={`text-success text-decoration-none`}>
+				// 		{children}
+				// 	</a>
+				// )
 			}
 		},
 	},
@@ -295,28 +302,26 @@ const faqTextOptions = {
 // 	},
 // }
 
-// const formTextOptions = {
-// 	renderNode: {
-// 		[BLOCKS.HEADING_5]: (node, children) => <h5 className={`mb-3 font-weight-bold`}>{children}</h5>,
-// 		[BLOCKS.PARAGRAPH]: (node, children) => <p className={`font-size-sm ${textMuted}`}>{children}</p>,
-// 		[INLINES.HYPERLINK]: (node, children) => {
-// 			if (node.data.uri && node.data.uri.startsWith('/')) {
-// 				return (
-// 					<Link to={node.data.uri} className={`text-success text-decoration-none`}>
-// 						{children}
-// 					</Link>
-// 				)
-// 			} else {
-// 				return (
-// 					<a href={node.data.uri} target="_blank" rel="noopener noreferrer" className={`text-success text-decoration-none`}>
-// 						{children}
-// 					</a>
-// 				)
-// 			}
-// 		},
-// 	},
-// }
+const formTextOptions = {
+	renderNode: {
+		[BLOCKS.HEADING_5]: (node, children) => <h5 className={`mb-3 font-weight-bold`}>{children}</h5>,
+		[BLOCKS.PARAGRAPH]: (node, children) => <p className={`font-size-sm text-muted`}>{children}</p>,
+		[INLINES.HYPERLINK]: (node, children) => {
+			if (node.data.uri && node.data.uri.startsWith('/')) {
+				return (
+					<Link to={node.data.uri} className={`text-success text-decoration-none`}>
+						{children}
+					</Link>
+				)
+			} else {
+				return (
+					<a href={node.data.uri} target="_blank" rel="noopener noreferrer" className={`text-success text-decoration-none`}>
+						{children}
+					</a>
+				)
+			}
+		},
+	},
+}
 
-// export { defaultTextOptions, faqTextOptions, formTextOptions, options, cardBodyTextOptions, legalTextOptions }
-
-export { heroTextOptions, defaultTextOptions, infoBoxTextOptions, faqTextOptions }
+export { heroTextOptions, defaultTextOptions, infoBoxTextOptions, faqTextOptions, formTextOptions }
