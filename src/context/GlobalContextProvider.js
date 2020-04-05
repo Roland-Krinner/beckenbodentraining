@@ -4,20 +4,15 @@ export const GlobalStateContext = React.createContext()
 export const GlobalDispatchContext = React.createContext()
 
 const initialState = {
-	theme: 'light',
 	modalVisible: false,
 	notificationVisible: false,
-	messages: []
+	messages: [],
+	cookieBannerVisible: false,
+	mapVisible: true,
 }
 
 function reducer(state, action) {
 	switch (action.type) {
-		case 'TOGGLE_THEME': {
-			return {
-				...state,
-				theme: state.theme === 'light' ? 'dark' : 'light',
-			}
-		}
 		case 'TOGGLE_MODAL': {
 			return {
 				...state,
@@ -28,13 +23,31 @@ function reducer(state, action) {
 			return {
 				...state,
 				notificationVisible: action.notificationVisible,
-				messages: action.messages
+				messages: action.messages,
 			}
 		}
 		case 'HIDE_NOTIFICATION': {
 			return {
 				...state,
 				notificationVisible: false,
+			}
+		}
+		case 'HIDE_COOKIEBANNER': {
+			return {
+				...state,
+				cookieBannerVisible: false,
+			}
+		}
+		case 'SHOW_MAP': {
+			return {
+				...state,
+				mapVisible: true,
+			}
+		}
+		case 'HIDE_MAP': {
+			return {
+				...state,
+				mapVisible: false,
 			}
 		}
 		default:

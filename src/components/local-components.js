@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { GlobalDispatchContext, GlobalStateContext } from '../context/GlobalContextProvider'
 import { Link } from 'gatsby'
+import Styles from './local-components.module.scss'
 
 const SubPage = ({ children, data: { classes } }) => {
 	return <main className={`pt-5 pt-lg-8 pb-8 pb-sm-10 ${classes}`}>{children}</main>
@@ -38,4 +40,32 @@ const SVG = ({ svg, file, alt }) => {
 	return <img src="" alt={alt} />
 }
 
-export { SubPage, Section, SVG, CTA, CtaExternal }
+const ToggleMapCheckbox = () => {
+	const dispatch = useContext(GlobalDispatchContext)
+	const state = useContext(GlobalStateContext)
+
+	return (
+		<div className={Styles.formCheck}>
+			<label className="no-select">
+				<input
+					type="checkbox"
+					className="form-check-input"
+					onChange={e => {
+						if (e.target.checked) {
+							dispatch({ type: 'SHOW_MAP' })
+						} else {
+							dispatch({ type: 'HIDE_MAP' })
+						}
+					}}
+					checked={state.mapVisible}
+				/>
+				<span>
+					<i className="fe fe-check"></i>
+				</span>
+				Mapbox verwenden
+			</label>
+		</div>
+	)
+}
+
+export { SubPage, Section, SVG, CTA, CtaExternal, ToggleMapCheckbox }

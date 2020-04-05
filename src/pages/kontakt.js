@@ -5,7 +5,7 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import Layout from '../components/layout'
 // import Head from '../components/head'
 import { SubPage } from '../components/local-components'
-import ContactForm from '../components/contactForm'
+import ContactForm from '../components/contact-form'
 import { defaultTextOptions, formTextOptions } from '../components/format-options'
 import Styles from './kontakt.module.scss'
 

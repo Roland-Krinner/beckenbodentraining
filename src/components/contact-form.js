@@ -3,7 +3,7 @@ import { navigate } from 'gatsby'
 import { Form, Col, Button } from 'react-bootstrap'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { GlobalDispatchContext } from '../context/GlobalContextProvider'
-import Styles from './contactForm.module.scss'
+import Styles from './contact-form.module.scss'
 
 const onRegisterSuccess = navUrl => {
 	navigate(navUrl)
@@ -137,20 +137,20 @@ export default ({ data: { prefilledText, lgCol } }) => {
 			<input type="hidden" name="form-name" value="Formular Test" />
 			<Form.Row>
 				<Form.Group as={Col} xs={12} md={12} lg={lgColName} controlId="formName" className="mb-2">
-					<Form.Label className={`h6 no-select mb-1 text-muted`}>Name (Pflichtfeld)</Form.Label>
+					<Form.Label className={`h6 no-select mb-1 text-gray-700`}>Name (Pflichtfeld)</Form.Label>
 					<Form.Control type="text" placeholder="Name" name="name" spellCheck="false" onChange={onFieldChange} className={`border-${fieldsValidation.name} ${Styles.formControl}`} />
 				</Form.Group>
 				<Form.Group as={Col} xs={12} md={12} lg={lgColEmail} controlId="formEmail" className="mb-2">
-					<Form.Label className={`h6 no-select mb-1 text-muted`}>E-Mail (Pflichtfeld)</Form.Label>
+					<Form.Label className={`h6 no-select mb-1 text-gray-700`}>E-Mail (Pflichtfeld)</Form.Label>
 					<Form.Control type="email" placeholder="E-Mail Adresse" name="email" spellCheck="false" onChange={onFieldChange} className={`border-${fieldsValidation.email} ${Styles.formControl}`} />
 				</Form.Group>
 			</Form.Row>
 			<Form.Group controlId="formTextarea" className="mb-2">
-				<Form.Label className={`h6 no-select mb-1 text-muted`}>Nachricht (Pflichtfeld)</Form.Label>
+				<Form.Label className={`h6 no-select mb-1 text-gray-700`}>Nachricht (Pflichtfeld)</Form.Label>
 				<Form.Control as="textarea" rows="3" placeholder="Nachricht" name="message" spellCheck="false" value={fieldValue.message} onChange={onFieldChange} className={`border-${fieldsValidation.message} ${Styles.formControl}`} />
 			</Form.Group>
 			<Form.Group className="mb-4">
-				<Form.Label className={`h6 no-select mb-1 text-muted`}>reCAPTCHA (Pflichtfeld)</Form.Label>
+				<Form.Label className={`h6 no-select mb-1 text-gray-700`}>reCAPTCHA (Pflichtfeld)</Form.Label>
 				<div className={`${Styles.recaptchaWrapper}`}>
 					<ReCAPTCHA sitekey={process.env.GATSBY_SITE_RECAPTCHA_KEY} onChange={setRecaptchaValue} />
 				</div>

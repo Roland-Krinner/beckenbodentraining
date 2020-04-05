@@ -3,7 +3,6 @@ import { Container, Row, Col, Card } from 'react-bootstrap'
 import { useStaticQuery, graphql } from 'gatsby'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { defaultTextOptions, infoBoxTextOptions } from './format-options'
-// import { Section } from './local-components'
 
 export default () => {
 	const data = useStaticQuery(graphql`

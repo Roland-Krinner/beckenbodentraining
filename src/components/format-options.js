@@ -1,7 +1,7 @@
 import React from 'react'
 import { useStaticQuery, graphql, Link } from 'gatsby'
 import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types'
-import { CTA, CtaExternal } from './local-components'
+import { CTA, CtaExternal, ToggleMapCheckbox } from './local-components'
 
 const BrandData = ({ data: { searchStr, customClasses } }) => {
 	const data = useStaticQuery(graphql`
@@ -15,6 +15,7 @@ const BrandData = ({ data: { searchStr, customClasses } }) => {
 						telefon
 						land
 						eMail
+						websiteName
 					}
 				}
 			}
@@ -26,6 +27,7 @@ const BrandData = ({ data: { searchStr, customClasses } }) => {
 	const land = data.allContentfulDatenKontaktdaten.edges[0].node.land
 	const telefon = data.allContentfulDatenKontaktdaten.edges[0].node.telefon
 	const eMail = data.allContentfulDatenKontaktdaten.edges[0].node.eMail
+	const websiteName = data.allContentfulDatenKontaktdaten.edges[0].node.websiteName
 
 	const paragraphClasses = customClasses ? customClasses : `text-muted`
 
@@ -54,20 +56,28 @@ const BrandData = ({ data: { searchStr, customClasses } }) => {
 				</p>
 			</>
 		)
-	} else if (searchStr === '$$imprintAddress$$') {
-		return <p className={`${paragraphClasses}`}>{/* {name}
+	} else if (searchStr === '$$impressumAddresse$$') {
+		return (
+			<p className={`${paragraphClasses}`}>
+				{name}
 				<br />
-				{street}
+				{strasse}
 				<br />
-				{city}
+				{ort}
 				<br />
-				{country} */}</p>
-	} else if (searchStr === '$$imprintContact$$') {
-		return <p className={`${paragraphClasses}`}>{/* Telefon: {phone}
+				{land}
+			</p>
+		)
+	} else if (searchStr === '$$impressumKontakt$$') {
+		return (
+			<p className={`${paragraphClasses}`}>
+				Telefon: {telefon}
 				<br />
 				E-Mail: {eMail}
 				<br />
-				Webseite: {websiteName} */}</p>
+				Webseite: {websiteName}
+			</p>
+		)
 	} else if (searchStr === '$$adresse$$') {
 		return (
 			<p className={`${paragraphClasses}`}>
@@ -108,6 +118,8 @@ const BrandData = ({ data: { searchStr, customClasses } }) => {
 				</a>
 			</p>
 		)
+	} else if (searchStr === '$$KartenEinstellungen$$') {
+		return <ToggleMapCheckbox />
 	}
 	return ''
 }
@@ -137,9 +149,9 @@ const defaultTextOptions = {
 			if (node.content.length === 1 && node.content[0].value === '') {
 				return ''
 			} else if (node.content[0].value.indexOf('$$') !== -1) {
-				return <BrandData data={{ searchStr: node.content[0].value }} />
+				return <BrandData data={{ searchStr: node.content[0].value, customClasses: 'text-gray-700' }} />
 			} else {
-				return <p className={`font-size-lg text-muted`}>{children}</p>
+				return <p className={`font-size-lg text-gray-700`}>{children}</p>
 			}
 		},
 		[BLOCKS.HR]: (node, children) => <hr className={`border-gray-300 my-6`} />,
@@ -212,11 +224,11 @@ const faqTextOptions = {
 		[BLOCKS.HEADING_6]: (node, children) => {
 			return (
 				<span className="badge badge-pill badge-gray-700-soft mb-3">
-					<span className={`h6 text-uppercase text-muted`}>{children}</span>
+					<span className={`h6 text-uppercase text-gray-700`}>{children}</span>
 				</span>
 			)
 		},
-		[BLOCKS.PARAGRAPH]: (node, children) => <p className={`font-size-lg text-muted mb-7 mb-md-9`}>{children}</p>,
+		[BLOCKS.PARAGRAPH]: (node, children) => <p className={`font-size-lg text-gray-700 mb-7 mb-md-9`}>{children}</p>,
 		[INLINES.HYPERLINK]: (node, children) => {
 			if (node.data.uri && node.data.uri.startsWith('/')) {
 				return <CTA data={{ to: node.data.uri, classes: '' }}>{children}</CTA>
@@ -232,36 +244,56 @@ const faqTextOptions = {
 	},
 }
 
-// const legalTextOptions = {
-// 	renderNode: {
-// 		[BLOCKS.PARAGRAPH]: (node, children) => {
-// 			if (node.content.length === 1 && node.content[0].value === '') {
-// 				return ''
-// 			} else if (node.content[0].value.indexOf('$$') !== -1) {
-// 				return <BrandData data={{ searchStr: node.content[0].value, customClasses: 'mb-4 mb-md-6' }} />
-// 			} else {
-// 				return <p className={`mb-4 mb-md-6`}>{children}</p>
-// 			}
-// 		},
-// 		[BLOCKS.HR]: (node, children) => <hr className={`border-dark my-6`} />,
-// 		[BLOCKS.UL_LIST]: (node, children) => <ul className={`pl-4 pb-5`}>{children}</ul>,
-// 		[BLOCKS.LIST_ITEM]: (node, children) => <li className={`normalize-last-p`}>{children}</li>,
-// 		[INLINES.HYPERLINK]: (node, children) => {
-// 			if (node.data.uri && node.data.uri.startsWith('/')) {
-// 				return <CTA data={{ to: node.data.uri, classes: '' }}>{children}</CTA>
-// 			} else {
-// 				return (
-// 					<a href={node.data.uri} target="_blank" rel="noopener noreferrer" className={`text-success text-decoration-none`}>
-// 						{children}
-// 					</a>
-// 				)
-// 			}
-// 		},
-// 	},
-// 	renderMark: {
-// 		[MARKS.BOLD]: text => <span className={`font-weight-bold`}>{text}</span>,
-// 	},
-// }
+const mapTextOptions = {
+	renderNode: {
+		[BLOCKS.PARAGRAPH]: (node, children) => <p className={`font-size-lg text-muted xxx__mb-5`}>{children}</p>,
+		[INLINES.HYPERLINK]: (node, children) => {
+			if (node.data.uri && node.data.uri.startsWith('/')) {
+				return <CTA data={{ to: node.data.uri, classes: '' }}>{children}</CTA>
+			} else {
+				return <CtaExternal data={{ to: node.data.uri, classes: 'mt-5 mt-md-7' }}>{children}</CtaExternal>
+			}
+		},
+	},
+	// https://github.com/contentful/rich-text/issues/96
+	// https://www.npmjs.com/package/@contentful/rich-text-react-renderer
+	renderText: text => {
+		return text.split('\n').reduce((children, textSegment, index) => {
+			return [...children, index > 0 && <br key={index} />, textSegment]
+		}, [])
+	},
+}
+
+const legalTextOptions = {
+	renderNode: {
+		[BLOCKS.PARAGRAPH]: (node, children) => {
+			if (node.content.length === 1 && node.content[0].value === '') {
+				return ''
+			} else if (node.content[0].value.indexOf('$$') !== -1) {
+				return <BrandData data={{ searchStr: node.content[0].value, customClasses: 'mb-4 mb-md-6' }} />
+			} else {
+				return <p className={`mb-4 mb-md-6`}>{children}</p>
+			}
+		},
+		[BLOCKS.HR]: (node, children) => <hr className={`border-dark my-6`} />,
+		[BLOCKS.UL_LIST]: (node, children) => <ul className={`pl-4 pb-5`}>{children}</ul>,
+		[BLOCKS.LIST_ITEM]: (node, children) => <li className={`normalize-last-p`}>{children}</li>,
+		[INLINES.HYPERLINK]: (node, children) => {
+			if (node.data.uri && node.data.uri.startsWith('/')) {
+				return <CTA data={{ to: node.data.uri, classes: '' }}>{children}</CTA>
+			} else {
+				return (
+					<a href={node.data.uri} target="_blank" rel="noopener noreferrer" className={`text-success text-decoration-none`}>
+						{children}
+					</a>
+				)
+			}
+		},
+	},
+	renderMark: {
+		[MARKS.BOLD]: text => <span className={`font-weight-bold`}>{text}</span>,
+	},
+}
 
 // const options = {
 // 	renderNode: {
@@ -305,7 +337,7 @@ const faqTextOptions = {
 const formTextOptions = {
 	renderNode: {
 		[BLOCKS.HEADING_5]: (node, children) => <h5 className={`mb-3 font-weight-bold`}>{children}</h5>,
-		[BLOCKS.PARAGRAPH]: (node, children) => <p className={`font-size-sm text-muted`}>{children}</p>,
+		[BLOCKS.PARAGRAPH]: (node, children) => <p className={`font-size-sm text-gray-700`}>{children}</p>,
 		[INLINES.HYPERLINK]: (node, children) => {
 			if (node.data.uri && node.data.uri.startsWith('/')) {
 				return (
@@ -324,4 +356,25 @@ const formTextOptions = {
 	},
 }
 
-export { heroTextOptions, defaultTextOptions, infoBoxTextOptions, faqTextOptions, formTextOptions }
+const cookieBannerTextOptions = {
+	renderNode: {
+		[BLOCKS.PARAGRAPH]: (node, children) => <p className={`font-size-sm text-gray-700`}>{children}</p>,
+		[INLINES.HYPERLINK]: (node, children) => {
+			if (node.data.uri && node.data.uri.startsWith('/')) {
+				return (
+					<Link to={node.data.uri} className={`text-success text-decoration-none`}>
+						{children}
+					</Link>
+				)
+			} else {
+				return (
+					<a href={node.data.uri} target="_blank" rel="noopener noreferrer" className={`text-success text-decoration-none`}>
+						{children}
+					</a>
+				)
+			}
+		},
+	},
+}
+
+export { heroTextOptions, defaultTextOptions, infoBoxTextOptions, faqTextOptions, formTextOptions, legalTextOptions, cookieBannerTextOptions, mapTextOptions }

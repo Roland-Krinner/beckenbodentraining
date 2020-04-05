@@ -1,0 +1,13 @@
+@import '../scss/mixins';
+
+.card-body {
+	@include cardBodyPaddingDefault;
+	// xs
+	@media (max-width: 320px) {
+		@include cardBodyPaddingXS;
+	}
+	//md
+	@media (min-width: 768px) {
+		@include cardBodyPaddingMD;
+	}
+}

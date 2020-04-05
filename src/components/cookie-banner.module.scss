@@ -1,11 +1,11 @@
-.notification-wrapper {
+.wrapper {
 	position: fixed;
 	display: block;
 	width: 100%;
 	top: auto;
 	bottom: 0;
 	left: 0;
-	z-index: 1052;
+	z-index: 1051;
 
 	> div {
 		position: absolute;
@@ -14,6 +14,7 @@
 		right: -1000rem;
 		top: auto;
 		bottom: 0.5rem;
+		background-color: white;
 
 		// sm
 		@media (min-width: 576px) {
@@ -21,4 +22,9 @@
 			max-width: 350px;
 		}
 	}
+}
+
+.footer {
+	display: flex;
+	justify-content: flex-end;
 }
