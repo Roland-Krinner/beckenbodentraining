@@ -5,7 +5,7 @@
  */
 
 module.exports = {
-  plugins: [
+	plugins: [
 		// {
 		// 	resolve: `gatsby-plugin-manifest`,
 		// 	options: {
@@ -13,7 +13,7 @@ module.exports = {
 		// 		short_name: `Kletterlehrer`,
 		// 		start_url: `/`,
 		// 		background_color: `#ffffff`,
-		// 		theme_color: `#ffffff`, 
+		// 		theme_color: `#ffffff`,
 		// 		display: `standalone`,
 		// 		icon: `src/images/icon.svg`,
 		// 	},
@@ -24,7 +24,7 @@ module.exports = {
 			resolve: `gatsby-source-contentful`,
 			options: {
 				spaceId: process.env.CONTENTFUL_SPACE_ID,
-				accessToken: process.env.CONTENTFUL_ACCESS_TOKEN
+				accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
 			},
 		},
 		`gatsby-plugin-sass`,
@@ -49,6 +49,12 @@ module.exports = {
 						},
 					},
 				],
+			},
+		},
+		{
+			resolve: `gatsby-plugin-compile-es6-packages`,
+			options: {
+				modules: ['mapbox-gl'],
 			},
 		},
 	],
