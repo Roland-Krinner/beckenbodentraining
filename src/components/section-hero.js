@@ -60,7 +60,7 @@ export default () => {
 			<Container>
 				<Row className="align-items-stretch two-col-header">
 					<Col xs={12} md={6} className="offset-md-1 order-md-2 two-col-header-item">
-						<Flickity className="d-md-none img-cover" options={{ lazyLoad: 1, imagesLoaded: true, wrapAround: false, prevNextButtons: false, pageDots: false, draggable: true }}>
+						<Flickity className="d-md-none img-cover" options={{ lazyLoad: 1, imagesLoaded: true, wrapAround: true, prevNextButtons: false, pageDots: false, draggable: true }}>
 							<MobileImages />
 						</Flickity>
 						<div className="position-relative h-100 vw-50 d-none d-md-block">

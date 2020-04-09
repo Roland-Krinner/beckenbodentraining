@@ -36,6 +36,9 @@ const NavContent = ({ pageInfo }) => {
 			<Link to="/" className={Styles.brand}>
 				<SVG svg={svg} file={file} alt={alt} />
 			</Link>
+			{/* <div>
+				<SVG svg={svg} file={file} alt={alt} />
+			</div> */}
 			<Navbar.Toggle />
 			<Navbar.Collapse>
 				<Navbar.Toggle>
