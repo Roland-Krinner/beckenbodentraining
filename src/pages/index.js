@@ -17,7 +17,7 @@ export default props => {
 				<SectionIntro />
 				<SectionProfile />
 				<SectionInfo />
-				{/* <SectionMap /> */}
+				<SectionMap />
 				<SectionFAQs />
 			</main>
 		</Layout>
