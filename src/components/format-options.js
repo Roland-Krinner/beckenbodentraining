@@ -119,7 +119,11 @@ const BrandData = ({ data: { searchStr, customClasses } }) => {
 			</p>
 		)
 	} else if (searchStr === '$$KartenEinstellungen$$') {
-		return <ToggleMapCheckbox />
+		return (
+			<p className={`${paragraphClasses}`}>
+				<ToggleMapCheckbox />
+			</p>
+		)
 	}
 	return ''
 }
@@ -294,45 +298,6 @@ const legalTextOptions = {
 		[MARKS.BOLD]: text => <span className={`font-weight-bold`}>{text}</span>,
 	},
 }
-
-// const options = {
-// 	renderNode: {
-// 		[BLOCKS.HEADING_3]: (node, children) => <h3 className={`mb-5 font-weight-bold`}>{children}</h3>,
-// 		[BLOCKS.HEADING_2]: (node, children) => <h2 className={`mb-5 font-weight-bold`}>{children}</h2>,
-// 		[BLOCKS.PARAGRAPH]: (node, children) => <p className={`${textMuted}`}>{children}</p>,
-// 		[BLOCKS.UL_LIST]: (node, children) => <div className={`pb-5`}>{children}</div>,
-// 		[BLOCKS.LIST_ITEM]: (node, children) => (
-// 			<div className={`d-flex list-item`}>
-// 				<div className={`badge badge-rounded-circle badge-secondary mt-1 mr-4`}>
-// 					<i className={`fe fe-check`}></i>
-// 				</div>
-// 				<span className={`mb-2`}>{children}</span>
-// 			</div>
-// 		),
-// 	},
-// 	renderMark: {
-// 		[MARKS.BOLD]: text => <span className={`${textMuted} font-weight-bold`}>{text}</span>,
-// 	},
-// }
-
-// const cardBodyTextOptions = {
-// 	renderNode: {
-// 		[BLOCKS.PARAGRAPH]: (node, children) => <p className={`${textMuted} xxx__${textMuted}`}>{children}</p>,
-// 		[BLOCKS.HEADING_6]: (node, children) => <p className={`h6 ${textMuted} mb-0`}>{children}</p>,
-// 		[BLOCKS.UL_LIST]: (node, children) => <div className={`pb-5`}>{children}</div>,
-// 		[BLOCKS.LIST_ITEM]: (node, children) => (
-// 			<div className={`d-flex list-item`}>
-// 				<div className={`badge badge-rounded-circle badge-secondary mt-1 mr-4`}>
-// 					<i className={`fe fe-check`}></i>
-// 				</div>
-// 				<span className={`mb-2`}>{children}</span>
-// 			</div>
-// 		),
-// 	},
-// 	renderMark: {
-// 		[MARKS.BOLD]: text => <span className={`${textMuted} font-weight-bold`}>{text}</span>,
-// 	},
-// }
 
 const formTextOptions = {
 	renderNode: {

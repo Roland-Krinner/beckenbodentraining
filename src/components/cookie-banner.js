@@ -47,7 +47,7 @@ export default () => {
 					<div className={Styles.footer}>
 						<a
 							href="#!"
-							className={`btn btn-success btn-sm`}
+							className={`btn btn-secondary btn-sm`}
 							onClick={e => {
 								e.preventDefault()
 								dispatch({ type: 'HIDE_COOKIEBANNER' })

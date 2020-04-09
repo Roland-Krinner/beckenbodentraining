@@ -1,0 +1,11 @@
+.body {
+	padding: 1rem !important;
+	// sm
+	@media (min-width: 576px) {
+		padding: 2.5rem !important;
+	}
+}
+
+.footer {
+	padding: 1rem !important;
+}
