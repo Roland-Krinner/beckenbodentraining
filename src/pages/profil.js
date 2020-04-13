@@ -2,7 +2,7 @@ import React from 'react'
 import { Container, Row, Col, Card } from 'react-bootstrap'
 import { useStaticQuery, graphql } from 'gatsby'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-import { defaultTextOptions } from '../components/format-options'
+import { defaultTextOptions, profileSectionTextOptions } from '../components/format-options'
 import Layout from '../components/layout'
 // import Head from '../components/head'
 import { SubPage } from '../components/local-components'
@@ -19,7 +19,7 @@ const CardSection = ({ data: { section, sektionenAnzeigen } }) => {
 		<Card className="shadow-dark-sm mt-20 mt-sm-7">
 			<Row>
 				<Col xs={12}>
-					<Card.Body className={`${Styles.cardBody}`}>{documentToReactComponents(section.text.json, defaultTextOptions)}</Card.Body>
+					<Card.Body className={`${Styles.cardBody}`}>{documentToReactComponents(section.text.json, profileSectionTextOptions)}</Card.Body>
 				</Col>
 			</Row>
 		</Card>

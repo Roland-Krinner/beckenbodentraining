@@ -117,7 +117,7 @@ export default ({ data: { prefilledText, lgCol } }) => {
 						} else {
 							setFormData(oldObj => {
 								return { ...oldObj, errors: ['Ein Fehler ist aufgetreten, bitte nochmal versuchen.'] }
-							})
+							}) 
 						}
 					})
 					.catch(err => {
@@ -133,8 +133,8 @@ export default ({ data: { prefilledText, lgCol } }) => {
 	const lgColEmail = lgCol || 7
 
 	return (
-		<Form name="Formular Test" method="POST" data-netlify="true" data-netlify-recaptcha="true" action="/danke-fuer-die-nachricht" onSubmit={onSubmit} noValidate>
-			<input type="hidden" name="form-name" value="Formular Test" />
+		<Form name="Kontakt Formular" method="POST" data-netlify="true" data-netlify-recaptcha="true" action="/danke-fuer-die-nachricht" onSubmit={onSubmit} noValidate>
+			<input type="hidden" name="form-name" value="Kontakt Formular" />
 			<Form.Row>
 				<Form.Group as={Col} xs={12} md={12} lg={lgColName} controlId="formName" className="mb-2">
 					<Form.Label className={`h6 no-select mb-1 text-gray-700`}>Name (Pflichtfeld)</Form.Label>

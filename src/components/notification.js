@@ -7,6 +7,8 @@ export default () => {
 	const dispatch = useContext(GlobalDispatchContext)
 	const state = useContext(GlobalStateContext)
 
+	// console.log('show notification', state.notificationVisible)
+
 	return (
 		<div className={`${Styles.notificationWrapper}`}>
 			<Toast

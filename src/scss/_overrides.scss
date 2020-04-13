@@ -38,6 +38,10 @@
 	border-color: rgba(66, 186, 150, 0.7) !important;
 }
 
+.border-width-2 {
+	border-width: 2px;
+}
+
 .btn,
 .btn.btn-sm,
 .card,
@@ -47,6 +51,29 @@
 
 .btn-sm {
 	min-width: 9.882rem;
+}
+
+.unobtrusive-list {
+	margin: 0;
+	padding-left: 0;
+	li {
+		list-style-type: none;
+		margin-bottom: 10px;
+		padding-left: 15px;
+		position: relative;
+		&::before {
+			background-color: #c5d2d8;
+			border-radius: 50%;
+			content: '';
+			height: 5px;
+			left: 0;
+			position: absolute;
+			top: 0.7em;
+			transform: translateY(-50%);
+			width: 5px;
+		}
+		p { margin-bottom: 0 !important;}
+	}
 }
 
 .normalize-first-p {

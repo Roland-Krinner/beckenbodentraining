@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useEffect, useContext, useState } from 'react'
 import { Toast } from 'react-bootstrap'
 import { GlobalDispatchContext, GlobalStateContext } from '../context/GlobalContextProvider'
 import { useStaticQuery, graphql } from 'gatsby'
@@ -29,13 +29,20 @@ export default () => {
 	const dispatch = useContext(GlobalDispatchContext)
 	const state = useContext(GlobalStateContext)
 
+	// workaround, because direct binding to global state does not work in production
+	const [showToast, setShowToast] = useState(false)
+
+	useEffect(() => {
+		setShowToast(state.cookieBannerVisible)
+	}, [state.cookieBannerVisible])
+
 	return (
 		<div className={`${Styles.wrapper}`}>
 			<Toast
 				onClose={() => {
 					dispatch({ type: 'HIDE_COOKIEBANNER' })
 				}}
-				show={state.cookieBannerVisible}
+				show={showToast}
 				animation={false}
 				className="no-select"
 			>
@@ -45,16 +52,14 @@ export default () => {
 				<Toast.Body>
 					{documentToReactComponents(textJSON, cookieBannerTextOptions)}
 					<div className={Styles.footer}>
-						<a
-							href="#!"
+						<button
 							className={`btn btn-secondary btn-sm`}
-							onClick={e => {
-								e.preventDefault()
+							onClick={() => {
 								dispatch({ type: 'HIDE_COOKIEBANNER' })
 							}}
 						>
 							{buttonText}
-						</a>
+						</button>
 					</div>
 				</Toast.Body>
 			</Toast>

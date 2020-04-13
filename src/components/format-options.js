@@ -33,7 +33,7 @@ const BrandData = ({ data: { searchStr, customClasses } }) => {
 
 	if (searchStr === '$$kontaktDaten$$') {
 		return (
-			<>
+			<address className="mb-0">
 				<p className={`${paragraphClasses}`}>
 					{name}
 					<br />
@@ -54,19 +54,21 @@ const BrandData = ({ data: { searchStr, customClasses } }) => {
 						{eMail}
 					</a>
 				</p>
-			</>
+			</address>
 		)
 	} else if (searchStr === '$$impressumAddresse$$') {
 		return (
-			<p className={`${paragraphClasses}`}>
-				{name}
-				<br />
-				{strasse}
-				<br />
-				{ort}
-				<br />
-				{land}
-			</p>
+			<address className="mb-0">
+				<p className={`${paragraphClasses}`}>
+					{name}
+					<br />
+					{strasse}
+					<br />
+					{ort}
+					<br />
+					{land}
+				</p>
+			</address>
 		)
 	} else if (searchStr === '$$impressumKontakt$$') {
 		return (
@@ -146,8 +148,8 @@ const heroTextOptions = {
 
 const defaultTextOptions = {
 	renderNode: {
-		[BLOCKS.HEADING_1]: (node, children) => <h1 className={`mb-0 xxx__mb-sm-1`}>{children}</h1>,
-		[BLOCKS.HEADING_6]: (node, children) => <p className={`font-size-lg mb-4 mb-lg-5 text-muted`}>{children}</p>,
+		[BLOCKS.HEADING_1]: (node, children) => <h1 className={`mb-0 xxx__mb-sm-1 h2`}>{children}</h1>,
+		[BLOCKS.HEADING_6]: (node, children) => <p className={`xxx__font-size-lg mb-4 mb-lg-5 text-muted`}>{children}</p>,
 		[BLOCKS.HEADING_3]: (node, children) => <h3 className={`font-weight-bold`}>{children}</h3>,
 		[BLOCKS.PARAGRAPH]: (node, children) => {
 			if (node.content.length === 1 && node.content[0].value === '') {
@@ -167,6 +169,89 @@ const defaultTextOptions = {
 				</div>
 				<span className={`mb-2`}>{children}</span>
 			</div>
+		),
+		[INLINES.HYPERLINK]: (node, children) => {
+			if (node.data.uri && node.data.uri.startsWith('/')) {
+				return <CTA data={{ to: node.data.uri, classes: '' }}>{children}</CTA>
+			} else {
+				return (
+					<a href={node.data.uri} target="_blank" rel="noopener noreferrer" className={`text-success text-decoration-none`}>
+						{children}
+					</a>
+				)
+			}
+		},
+	},
+	renderMark: {
+		[MARKS.BOLD]: text => <span className={`font-weight-bold`}>{text}</span>,
+	},
+}
+
+const kontaktTextOptions = {
+	renderNode: {
+		[BLOCKS.HEADING_1]: (node, children) => <h1 className={`mb-0 xxx__mb-sm-1 h2`}>{children}</h1>,
+		[BLOCKS.HEADING_6]: (node, children) => <p className={`xxx__font-size-lg mb-4 mb-lg-5 text-muted`}>{children}</p>,
+		[BLOCKS.HEADING_3]: (node, children) => <h3 className={`font-weight-bold`}>{children}</h3>,
+		[BLOCKS.PARAGRAPH]: (node, children) => {
+			if (node.content.length === 1 && node.content[0].value === '') {
+				return ''
+			} else if (node.content[0].value.indexOf('$$') !== -1) {
+				return <BrandData data={{ searchStr: node.content[0].value, customClasses: 'text-gray-700' }} />
+			} else {
+				return <p className={`text-gray-700`}>{children}</p>
+			}
+		},
+		[BLOCKS.HR]: (node, children) => <hr className={`border-gray-300 my-6`} />,
+		[BLOCKS.UL_LIST]: (node, children) => <div className={`pb-5`}>{children}</div>,
+		[BLOCKS.LIST_ITEM]: (node, children) => (
+			<div className={`d-flex list-item`}>
+				<div className={`badge badge-rounded-circle badge-success-soft mt-1 mr-4`}>
+					<i className={`fe fe-check`}></i>
+				</div>
+				<span className={`mb-2`}>{children}</span>
+			</div>
+		),
+		[INLINES.HYPERLINK]: (node, children) => {
+			if (node.data.uri && node.data.uri.startsWith('/')) {
+				return <CTA data={{ to: node.data.uri, classes: '' }}>{children}</CTA>
+			} else {
+				return (
+					<a href={node.data.uri} target="_blank" rel="noopener noreferrer" className={`text-success text-decoration-none`}>
+						{children}
+					</a>
+				)
+			}
+		},
+	},
+	renderMark: {
+		[MARKS.BOLD]: text => <span className={`font-weight-bold`}>{text}</span>,
+	},
+}
+
+const profileSectionTextOptions = {
+	renderNode: {
+		[BLOCKS.HEADING_1]: (node, children) => <h1 className={`mb-0`}>{children}</h1>,
+		[BLOCKS.HEADING_6]: (node, children) => <p className={`font-size-lg mb-4 mb-lg-5 text-muted`}>{children}</p>,
+		[BLOCKS.HEADING_3]: (node, children) => <h3 className={`xxx__mb-0 font-weight-bold`}>{children}</h3>,
+		[BLOCKS.PARAGRAPH]: (node, children) => {
+			if (node.content.length === 1 && node.content[0].value === '') {
+				return ''
+			} else if (node.content[0].value.indexOf('$$') !== -1) {
+				return <BrandData data={{ searchStr: node.content[0].value, customClasses: 'text-gray-700' }} />
+			} else {
+				return <p className={`text-gray-700`}>{children}</p>
+			}
+		},
+		[BLOCKS.HR]: (node, children) => <hr />,
+		[BLOCKS.UL_LIST]: (node, children) => <ul className={`unobtrusive-list my-4`}>{children}</ul>,
+		[BLOCKS.LIST_ITEM]: (node, children) => (
+			<li className="mb-1">{children}</li>
+			// <div className={`d-flex list-item`}>
+			// 	<div className={`badge badge-rounded-circle badge-success-soft mt-1 mr-4`}>
+			// 		<i className={`fe fe-check`}></i>
+			// 	</div>
+			// 	<span className={`mb-2`}>{children}</span>
+			// </div>
 		),
 		[INLINES.HYPERLINK]: (node, children) => {
 			if (node.data.uri && node.data.uri.startsWith('/')) {
@@ -270,18 +355,29 @@ const mapTextOptions = {
 
 const legalTextOptions = {
 	renderNode: {
+		[BLOCKS.HEADING_1]: (node, children) => <h1 className={`mb-0`}>{children}</h1>,
+		[BLOCKS.HEADING_6]: (node, children) => <p className={`font-size-lg mb-4 mb-lg-5 text-muted`}>{children}</p>,
+		[BLOCKS.HEADING_3]: (node, children) => <h3 className={``}>{children}</h3>,
 		[BLOCKS.PARAGRAPH]: (node, children) => {
 			if (node.content.length === 1 && node.content[0].value === '') {
 				return ''
 			} else if (node.content[0].value.indexOf('$$') !== -1) {
-				return <BrandData data={{ searchStr: node.content[0].value, customClasses: 'mb-4 mb-md-6' }} />
+				return <BrandData data={{ searchStr: node.content[0].value, customClasses: 'text-gray-700' }} />
 			} else {
-				return <p className={`mb-4 mb-md-6`}>{children}</p>
+				return <p className={`text-gray-700`}>{children}</p>
 			}
 		},
-		[BLOCKS.HR]: (node, children) => <hr className={`border-dark my-6`} />,
-		[BLOCKS.UL_LIST]: (node, children) => <ul className={`pl-4 pb-5`}>{children}</ul>,
-		[BLOCKS.LIST_ITEM]: (node, children) => <li className={`normalize-last-p`}>{children}</li>,
+		[BLOCKS.HR]: (node, children) => <hr />,
+		[BLOCKS.UL_LIST]: (node, children) => <ul className={`unobtrusive-list my-4`}>{children}</ul>,
+		[BLOCKS.LIST_ITEM]: (node, children) => (
+			<li className="mb-1">{children}</li>
+			// <div className={`d-flex list-item`}>
+			// 	<div className={`badge badge-rounded-circle badge-success-soft mt-1 mr-4`}>
+			// 		<i className={`fe fe-check`}></i>
+			// 	</div>
+			// 	<span className={`mb-2`}>{children}</span>
+			// </div>
+		),
 		[INLINES.HYPERLINK]: (node, children) => {
 			if (node.data.uri && node.data.uri.startsWith('/')) {
 				return <CTA data={{ to: node.data.uri, classes: '' }}>{children}</CTA>
@@ -342,4 +438,4 @@ const cookieBannerTextOptions = {
 	},
 }
 
-export { heroTextOptions, defaultTextOptions, infoBoxTextOptions, faqTextOptions, formTextOptions, legalTextOptions, cookieBannerTextOptions, mapTextOptions }
+export { heroTextOptions, defaultTextOptions, profileSectionTextOptions, infoBoxTextOptions, faqTextOptions, formTextOptions, legalTextOptions, cookieBannerTextOptions, mapTextOptions, kontaktTextOptions }

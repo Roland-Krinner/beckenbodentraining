@@ -41,21 +41,21 @@ export default props => {
 
 	mapboxgl.accessToken = mapAccessToken
 
-	const mapContainer1 = useRef()
+	const mapContainer = useRef()
 
 	useEffect(() => {
-		const map1 = new mapboxgl.Map({
-			container: mapContainer1.current,
+		const map = new mapboxgl.Map({
+			container: mapContainer.current,
 			style: mapStyle,
 			center: [mapLocation.lon, mapLocation.lat],
 			zoom: mapZoomLevel,
 		})
 
-		map1.on('load', function() {
-			map1.loadImage(mapPin, function(error, image) {
+		map.on('load', function() {
+			map.loadImage(mapPin, function(error, image) {
 				if (error) throw error
-				map1.addImage('custom-marker', image)
-				map1.addLayer(layerSettings)
+				map.addImage('custom-marker', image)
+				map.addLayer(layerSettings)
 			})
 
 			const layerSettings = {
@@ -91,5 +91,5 @@ export default props => {
 		})
 	}, [state.mapVisible, mapLocation.lat, mapLocation.lon, mapPin, mapPinText, mapStyle, mapZoomLevel])
 
-	return <div ref={mapContainer1} className={props.classes}></div>
+	return <div ref={mapContainer} className={props.classes}></div>
 }

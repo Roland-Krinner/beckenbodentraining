@@ -33,12 +33,15 @@ const NavContent = ({ pageInfo }) => {
 
 	return (
 		<>
-			<Link to="/" className={Styles.brand}>
-				<SVG svg={svg} file={file} alt={alt} />
-			</Link>
-			{/* <div>
-				<SVG svg={svg} file={file} alt={alt} />
-			</div> */}
+			{pageInfo.pageType && pageInfo.pageType === 'homePage' ? (
+				<div className={Styles.brand}>
+					<SVG svg={svg} file={file} alt={alt} />
+				</div>
+			) : (
+				<Link to="/" className={Styles.brand}>
+					<SVG svg={svg} file={file} alt={alt} />
+				</Link>
+			)}
 			<Navbar.Toggle />
 			<Navbar.Collapse>
 				<Navbar.Toggle>

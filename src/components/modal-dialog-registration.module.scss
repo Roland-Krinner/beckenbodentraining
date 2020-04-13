@@ -8,16 +8,9 @@
 	}
 }
 
-.body {
-	padding: 1rem !important;
-	// sm
-	@media (min-width: 576px) {
-		padding: 2.5rem !important;
-	}
-}
-
-.footer {
-	padding: 1.412rem !important;
+.modal-body {
+	// overflow: hidden;
+	padding: 1.765rem 1.412rem 1.412rem 1.412rem;
 
 	// xs
 	@media (max-width: 320px) {

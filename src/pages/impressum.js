@@ -33,8 +33,8 @@ export default props => {
 			{/* <Head title="Impressum" props={props}/> */}
 			<SubPage data={{ classes: 'bg-gray-200' }}>
 				<Container>{documentToReactComponents(introTextJSON, defaultTextOptions)}</Container>
-				<Container>
-					<Card className="shadow-dark-sm mt-20 mt-sm-7">
+				<Container className={Styles.mobileContainer}>
+					<Card className="shadow-dark-sm mt-4 mt-lg-5">
 						<Row>
 							<Col xs={12}>
 								<Card.Body className={`${Styles.cardBody}`}>{documentToReactComponents(contentTextJSON, legalTextOptions)}</Card.Body>

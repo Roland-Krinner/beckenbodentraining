@@ -6,18 +6,18 @@
 
 module.exports = {
 	plugins: [
-		// {
-		// 	resolve: `gatsby-plugin-manifest`,
-		// 	options: {
-		// 		name: `Kletterlehrer`,
-		// 		short_name: `Kletterlehrer`,
-		// 		start_url: `/`,
-		// 		background_color: `#ffffff`,
-		// 		theme_color: `#ffffff`,
-		// 		display: `standalone`,
-		// 		icon: `src/images/icon.svg`,
-		// 	},
-		// },
+		{
+			resolve: `gatsby-plugin-manifest`,
+			options: {
+				name: `Beckenbodentraining`,
+				short_name: `BeBo Training`,
+				start_url: `/`,
+				background_color: `#ffffff`,
+				theme_color: `#ffffff`,
+				display: `standalone`,
+				icon: `src/images/icon.svg`,
+			},
+		},
 		`gatsby-transformer-inline-svg`,
 		`gatsby-plugin-react-helmet`,
 		{
@@ -35,7 +35,7 @@ module.exports = {
 				path: `${__dirname}/src/`,
 			},
 		},
-		`gatsby-plugin-sharp`,
+		`gatsby-plugin-sharp`, 
 		{
 			resolve: `gatsby-transformer-remark`,
 			options: {

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { useStaticQuery, graphql } from 'gatsby'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
@@ -40,28 +40,21 @@ export default () => {
 
 	const mapTextJSON = data.allContentfulSeiteStartseite.edges[0].node.kartenText.json
 
+	// workaround, because direct binding to global state does not work in production
+	const [mapVisible, setMapVisible] = useState(true)
+
+	useEffect(() => {
+		setMapVisible(state.mapVisible)
+	}, [state.mapVisible])
+
 	return (
 		<section className="bg-white pt-8 pt-md-0 border-top border-bottom">
 			<Container>
 				<Row>
 					<Col xs={12} md={6}>
-						{state.mapVisible ? (
-							<div className="embed-responsive embed-responsive-1by1 d-md-none">
-								<Map classes="embed-responsive-item" />
-							</div>
-						) : (
-							<div className="d-md-none">
-								<ShowModalCta />
-							</div>
-						)}
+						<div className={mapVisible ? 'embed-responsive embed-responsive-1by1 d-md-none' : 'd-md-none'}>{mapVisible ? <Map classes="embed-responsive-item" /> : <ShowModalCta />}</div>
 						<div className="position-relative h-100 vw-50 float-right d-none d-md-block">
-							{state.mapVisible ? (
-								<Map classes="w-100 h-100" />
-							) : (
-								<div className="w-100 h-100 bg-gray-300 d-flex justify-content-center align-items-center">
-									<ShowModalCta />
-								</div>
-							)}
+							<div className={mapVisible ? 'w-100 h-100' : 'w-100 h-100 bg-gray-300 d-flex justify-content-center align-items-center'}>{mapVisible ? <Map classes="w-100 h-100" /> : <ShowModalCta />}</div>
 							<div className="shape shape-right shape-fluid-y svg-shim text-white">
 								<svg viewBox="0 0 100 1544" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path d="M0 386V0H100V1544H50V1158L0 386Z" fill="currentColor" />

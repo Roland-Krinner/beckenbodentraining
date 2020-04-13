@@ -45,7 +45,7 @@ const ToggleMapCheckbox = () => {
 	const state = useContext(GlobalStateContext)
 
 	return (
-		<div className={Styles.formCheck}>
+		<span className={Styles.formCheck}>
 			<label className="no-select">
 				<input
 					type="checkbox"
@@ -64,7 +64,7 @@ const ToggleMapCheckbox = () => {
 				</span>
 				Mapbox verwenden
 			</label>
-		</div>
+		</span>
 	)
 }
 

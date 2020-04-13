@@ -1,0 +1,36 @@
+// @import '../scss/colors';
+@import '../scss/mixins';
+
+.card-body {
+	@include cardBodyPaddingDefault;
+	// xs
+	@media (max-width: 320px) {
+		@include cardBodyPaddingXS;
+	}
+	//md
+	@media (min-width: 768px) {
+		@include cardBodyPaddingMD;
+	}
+}
+
+.mobile-container {
+	// sm
+	@media (max-width: 575px) {
+		padding-right: 0.5rem;
+		padding-left: 0.5rem;
+	}
+
+	// xs
+	// @media (max-width: 320px) {
+	// 	padding-right: 0.5rem;
+	// 	padding-left: 0.5rem;
+	// }
+}
+
+// .badge-wrapper {
+// 	// < md
+// 	@media (max-width: 767px) {
+// 		width: 100%;
+// 		overflow-x: scroll;
+// 	}
+// }

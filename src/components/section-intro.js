@@ -40,7 +40,7 @@ export default () => {
 							<Card.Body className="py-6 py-md-8">
 								<Row className="justify-content-center">
 									<Col xs={12} className="col-xl-9 py-md-2 py-lg-5">
-										{documentToReactComponents(infoBox1JSON, infoBoxTextOptions)}
+										<address className="mb-0">{documentToReactComponents(infoBox1JSON, infoBoxTextOptions)}</address>
 									</Col>
 								</Row>
 							</Card.Body>

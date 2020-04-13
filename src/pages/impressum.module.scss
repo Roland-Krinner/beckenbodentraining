@@ -11,3 +11,16 @@
 		@include cardBodyPaddingMD;
 	}
 }
+
+.mobile-container {
+	// sm
+	@media (max-width: 575px) {
+		padding-right: 0.5rem;
+		padding-left: 0.5rem;
+	}
+	// xs
+	// @media (max-width: 320px) {
+	// 	padding-right: 0.5rem;
+	// 	padding-left: 0.5rem;
+	// }
+}

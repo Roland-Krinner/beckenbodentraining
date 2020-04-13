@@ -83,11 +83,6 @@ export default ({ pageInfo: { pageType } }) => {
 								</Link>
 							</div>
 							<div className={`${listItemWrapper}`}>
-								<Link to="/leistungen" className={`${listItem}`}>
-									Leistungen
-								</Link>
-							</div>
-							<div className={`${listItemWrapper}`}>
 								<Link to="/profil" className={`${listItem}`}>
 									Profil
 								</Link>
@@ -102,13 +97,15 @@ export default ({ pageInfo: { pageType } }) => {
 					<Col xs={12} md={6} lg={4} xl={3}>
 						<div>
 							<h6 className={`${headline}`}>Adresse</h6>
-							<p className={`${listItemWrapper}`}>
-								{name}
-								<br />
-								{strasse}
-								<br />
-								{ort}
-							</p>
+							<address className="mb-0">
+								<p className={`${listItemWrapper}`}>
+									{name}
+									<br />
+									{strasse}
+									<br />
+									{ort}
+								</p>
+							</address>
 						</div>
 					</Col>
 					<Col xs={12} md={6} lg={4} xl={3}>
