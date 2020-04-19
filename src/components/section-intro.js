@@ -2,7 +2,7 @@ import React from 'react'
 import { Container, Row, Col, Card } from 'react-bootstrap'
 import { useStaticQuery, graphql } from 'gatsby'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-import { defaultTextOptions, infoBoxTextOptions } from './format-options'
+import { defaultTextOptions, infoBoxTextOptions, buttonTextOptions } from './format-options'
 
 export default () => {
 	const data = useStaticQuery(graphql`
@@ -16,7 +16,13 @@ export default () => {
 						infoBox1 {
 							json
 						}
+						buttonInfoBox1 {
+							json
+						}
 						infoBox2 {
+							json
+						}
+						buttonInfoBox2 {
 							json
 						}
 					}
@@ -26,7 +32,9 @@ export default () => {
 	`)
 	const introJSON = data.allContentfulSeiteStartseite.edges[0].node.intro.json
 	const infoBox1JSON = data.allContentfulSeiteStartseite.edges[0].node.infoBox1.json
+	const buttonInfoBox1JSON = data.allContentfulSeiteStartseite.edges[0].node.buttonInfoBox1.json
 	const infoBox2JSON = data.allContentfulSeiteStartseite.edges[0].node.infoBox2.json
+	const buttonInfoBox2JSON = data.allContentfulSeiteStartseite.edges[0].node.buttonInfoBox2.json
 
 	return (
 		<section className="pt-8 pt-md-12 normalize-last-p bg-gray-200">
@@ -41,6 +49,7 @@ export default () => {
 								<Row className="justify-content-center">
 									<Col xs={12} className="col-xl-9 py-md-2 py-lg-5">
 										<address className="mb-0">{documentToReactComponents(infoBox1JSON, infoBoxTextOptions)}</address>
+										{documentToReactComponents(buttonInfoBox1JSON, buttonTextOptions)}
 									</Col>
 								</Row>
 							</Card.Body>
@@ -52,6 +61,7 @@ export default () => {
 								<Row className="justify-content-center">
 									<Col xs={12} className="col-xl-9">
 										{documentToReactComponents(infoBox2JSON, infoBoxTextOptions)}
+										{documentToReactComponents(buttonInfoBox2JSON, buttonTextOptions)}
 									</Col>
 								</Row>
 							</Card.Body>

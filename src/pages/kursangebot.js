@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { Container, Row, Col, Card } from 'react-bootstrap'
 import { useStaticQuery, graphql } from 'gatsby'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
@@ -9,9 +9,20 @@ import { SubPage } from '../components/local-components'
 import ContactForm from '../components/contact-form'
 import ModalDialogRegistration from '../components/modal-dialog-registration'
 import { GlobalDispatchContext } from '../context/GlobalContextProvider'
+import withLocation from '../components/withLocation'
+import Flickity from '../components/flickity'
 import Styles from './kursangebot.module.scss'
+import '../scss/kursangebot.scss'
 
-export default props => {
+const Kursangebot = ({ hash }) => {
+	useEffect(() => {
+		if (hash !== '') {
+			setTimeout(() => {
+				navigateTo(hash)
+			}, 350)
+		}
+	}, [hash])
+
 	const dispatch = useContext(GlobalDispatchContext)
 	const [prefilledText, setPrefilledText] = useState({ text: '' })
 
@@ -28,13 +39,15 @@ export default props => {
 							headline
 							subline
 							detailsHeadline
-							detailsPreis
-							detailsZeit
-							detailsDatum
+							termine {
+								headline
+								wochentag
+								datum
+							}
 							detailsPreisHinweis
 							preisHinweisAnzeigen
 							buttonText
-							beschreibung {
+							beschreibungText {
 								json
 							}
 						}
@@ -47,22 +60,51 @@ export default props => {
 	const formularHeadline = data.allContentfulSeiteKursangebot.edges[0].node.formularHeadline
 	const formularTextJSON = data.allContentfulSeiteKursangebot.edges[0].node.formularText.json
 
+	const NavCard = ({ data: { section, idx } }) => {
+		return (
+			<div className="card mobile-card shadow-dark-sm" key={idx}>
+				<button
+					className="btn"
+					data-target={`kurs-${idx + 1}`}
+					onClick={e => {
+						handleNavigateTo(e, hash)
+					}}
+				>
+					{section.headline}
+				</button>
+			</div>
+		)
+	}
+
 	const CardSection = ({ data: { section, idx } }) => {
 		const margin = idx === 0 ? '' : 'mt-7'
 		const headline = section.headline
 		const subline = section.subline
 		const detailsHeadline = section.detailsHeadline
-		const detailsPreis = section.detailsPreis
-		const detailsZeit = section.detailsZeit
-		const detailsDatum = section.detailsDatum
+		const termine = section.termine
 		const detailsPreisHinweis = section.detailsPreisHinweis
 		const preisHinweisAnzeigen = section.preisHinweisAnzeigen
 		const buttonText = section.buttonText
-		const beschreibungJSON = section.beschreibung.json
+		const beschreibungTextJSON = section.beschreibungText.json
+
+		const RegisterBtn = ({ classes = '' }) => {
+			return (
+				<button
+					type="button"
+					className={`btn btn-success btn-sm mt-4 ${classes}`}
+					onClick={() => {
+						dispatch({ type: 'TOGGLE_REGISTRATION_MODAL' })
+						setPrefilledText({ text: `Ich interessiere mich für den Kurs: "${headline}"` })
+					}}
+				>
+					{buttonText}
+				</button>
+			)
+		}
 
 		return (
 			<>
-				<Container className={`${margin}`}>
+				<Container className={`${margin} kurs-${idx + 1}`}>
 					<h1 className="mb-0 h2">{headline}</h1>
 					<p className="mb-4 mb-lg-5 text-muted">{subline}</p>
 				</Container>
@@ -71,64 +113,59 @@ export default props => {
 						<Col xs={12}>
 							<Card className={`shadow-dark-sm`}>
 								<Card.Body className={`${Styles.cardBody}`}>
-									<div className="d-flex flex-column align-items-start flex-md-row-reverse align-items-md-center">
-										<span className="badge badge-secondary rounded mb-1 mb-md-0">{detailsPreis}</span>
-										<h3 className="font-weight-bold mr-auto mb-0 d-none d-md-block">{detailsHeadline}</h3>
-										<span className="font-size-sm text-gray-700 text-nowrap mr-auto d-md-none">{detailsHeadline}</span>
-									</div>
+									<h3 className="font-weight-bold mr-auto mb-0">{detailsHeadline}</h3>
 									<hr />
-									<div className="d-flex align-items-start mb-2">
-										<i className="fe fe-clock mr-2 text-secondary"></i>
-										<div>
-											{detailsZeit.map((item, idx) => {
-												return (
-													<span className="badge badge-secondary-soft mr-1 align-top no-select" key={idx}>
-														{item}
-													</span>
-												)
-											})}
-										</div>
-									</div>
-									<div className="d-flex align-items-start">
-										<i className="fe fe-calendar mr-2 text-secondary"></i>
-										<div>
-											{detailsDatum.map((item, idx) => {
-												return (
-													<span className="badge badge-secondary-soft mr-1 align-top no-select" key={idx}>
-														{item}
-													</span>
-												)
-											})}
-										</div>
-									</div>
-									<hr />
+									<Flickity options={{ contain: true, freeScroll: true, prevNextButtons: true, pageDots: false, draggable: true }}>
+										{termine.map(termin => {
+											return (
+												<>
+													<div className="carousel-cell">
+														<h5 className="font-weight-bold text-secondary mb-3 mb-sm-5">
+															<i className="fe fe-calendar mr-1"></i> {termin.headline}
+														</h5>
+														<div className="d-flex align-items-start mb-2">
+															<div>
+																{termin.wochentag.map((item, idx) => {
+																	return (
+																		<span className="badge badge-secondary-soft mr-1 align-top no-select xxtext-secondary" key={idx}>
+																			{/* <i className="fe fe-clock mr-2 text-secondary xxd-none xxd-sm-block"></i>*/}
+																			{item}
+																		</span>
+																	)
+																})}
+															</div>
+														</div>
+														<div className="d-flex align-items-start">
+															{/* <i className="fe fe-calendar mr-2 text-secondary d-none d-sm-block"></i> */}
+															<div>
+																{termin.datum.map((item, idx) => {
+																	return (
+																		<span className="badge badge-secondary-soft mr-1 align-top no-select" key={idx}>
+																			{item}
+																		</span>
+																	)
+																})}
+															</div>
+														</div>
+													</div>
+												</>
+											)
+										})}
+									</Flickity>
+									<RegisterBtn classes="d-block d-md-none" />
+									<div className="mt-7">{documentToReactComponents(beschreibungTextJSON, profileSectionTextOptions)}</div>
 									{preisHinweisAnzeigen === true ? (
-										<p className="h6 text-gray-700 mb-0 d-flex">
-											<span className="mr-1">*</span>
-											<span>{detailsPreisHinweis}</span>
-										</p>
+										<>
+											<hr />
+											<p className="h6 text-gray-700 mb-0 d-flex">
+												<span className="mr-1">*</span>
+												<span>{detailsPreisHinweis}</span>
+											</p>
+										</>
 									) : (
 										''
 									)}
-									<button
-										type="button"
-										className="btn btn-success btn-sm mt-4"
-										onClick={() => {
-											dispatch({ type: 'TOGGLE_REGISTRATION_MODAL' })
-											setPrefilledText({ text: `Ich interessiere mich für den Kurs: "${headline}"` })
-										}}
-									>
-										{buttonText}
-									</button>
-								</Card.Body>
-							</Card>
-						</Col>
-					</Row>
-					<Row>
-						<Col xs={12}>
-							<Card className={`shadow-dark-sm mt-20 mt-sm-5`}>
-								<Card.Body className={`${Styles.cardBody}`}>
-									<div>{documentToReactComponents(beschreibungJSON, profileSectionTextOptions)}</div>
+									<RegisterBtn classes="d-none d-md-block" />
 								</Card.Body>
 							</Card>
 						</Col>
@@ -139,9 +176,18 @@ export default props => {
 	}
 
 	return (
-		<Layout pageInfo={{ pageName: 'kursangebot', pageType: 'subPage' }}>
+		<Layout pageInfo={{ pageName: 'kursangebot', pageType: 'subPage', classes: 'kursangebot' }}>
 			{/* <Head title="Profil" props={props} /> */}
 			<SubPage data={{ classes: 'bg-gray-200' }}>
+				<div className="scrollable-wrapper d-block d-lg-none mb-4">
+					<div className="scrollable">
+						<div className="scrollable-content">
+							{sektionen.map((section, idx) => {
+								return <NavCard data={{ section, idx }} key={idx} />
+							})}
+						</div>
+					</div>
+				</div>
 				{sektionen.map((section, idx) => {
 					return <CardSection data={{ section, idx }} key={idx} />
 				})}
@@ -153,3 +199,54 @@ export default props => {
 		</Layout>
 	)
 }
+
+const handleNavigateTo = e => {
+	const target = e.target.getAttribute('data-target')
+	if (window.history.pushState) {
+		window.history.pushState(null, null, `#${target}`)
+	} else {
+		window.location.hash = `#${target}`
+	}
+	navigateTo(target)
+}
+
+const navigateTo = targetId => {
+	const duration = 600
+	const offset = 10
+	scrollTo(targetId, duration, offset)
+}
+
+const scrollTo = (targetId, duration, offset) => {
+	const target = document.querySelector(`.${targetId}`)
+	if (target === null) {
+		return
+	}
+	const targetPosition = target.getBoundingClientRect().top
+	const startPosition = window.pageYOffset
+	const distance = targetPosition - offset
+	let startTime = null
+
+	const animate = currentTime => {
+		if (startTime === null) {
+			startTime = currentTime
+		}
+		const timeElapsed = currentTime - startTime
+		const run = ease(timeElapsed, startPosition, distance, duration)
+		window.scrollTo(0, run)
+		if (timeElapsed < duration) {
+			requestAnimationFrame(animate)
+		}
+	}
+
+	requestAnimationFrame(animate)
+}
+
+const ease = (t, b, c, d) => {
+	// easeInOutQuad
+	t /= d / 2
+	if (t < 1) return (c / 2) * t * t + b
+	t--
+	return (-c / 2) * (t * (t - 2) - 1) + b
+}
+
+export default withLocation(Kursangebot)

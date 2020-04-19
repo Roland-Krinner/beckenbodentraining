@@ -282,18 +282,25 @@ const infoBoxTextOptions = {
 				return <p className={`text-muted mb-5`}>{children}</p>
 			}
 		},
-		[BLOCKS.UL_LIST]: (node, children) => <div className={`pb-5`}>{children}</div>,
-		[BLOCKS.LIST_ITEM]: (node, children) => (
-			<div className={`d-flex list-item`}>
-				<div className={`badge badge-rounded-circle badge-success-soft mt-1 mr-4`}>
-					<i className={`fe fe-check`}></i>
+		[BLOCKS.UL_LIST]: (node, children) => <div className={`pb-0`}>{children}</div>,
+		[BLOCKS.LIST_ITEM]: (node, children) => {
+			return (
+				<div className={`d-flex list-item`}>
+					<div className={`badge badge-rounded-circle badge-success-soft mt-1 mr-4`}>
+						<i className={`fe fe-check`}></i>
+					</div>
+					<span className={`mb-2`}>{node.content[0].content[0].value !== '' ? node.content[0].content[0].value : children}</span>
 				</div>
-				<span className={`mb-2`}>{node.content[0].content[0].value}</span>
-			</div>
-		),
+			)
+		},
 		[INLINES.HYPERLINK]: (node, children) => {
 			if (node.data.uri && node.data.uri.startsWith('/')) {
-				return <CTA data={{ to: node.data.uri, classes: 'mt-0 mt-md-6' }}>{children}</CTA>
+				// return <CTA data={{ to: node.data.uri, classes: 'mt-0 mt-md-6' }}>{children}</CTA>
+				return (
+					<Link to={node.data.uri} className="text-success text-decoration-none">
+						{children}
+					</Link>
+				)
 			} else {
 				return (
 					<a href={node.data.uri} target="_blank" rel="noopener noreferrer" className={`text-success text-decoration-none`}>
@@ -305,6 +312,22 @@ const infoBoxTextOptions = {
 	},
 	renderMark: {
 		[MARKS.BOLD]: text => <span className={`font-weight-bold`}>{text}</span>,
+	},
+}
+
+const buttonTextOptions = {
+	renderNode: {
+		[INLINES.HYPERLINK]: (node, children) => {
+			if (node.data.uri && node.data.uri.startsWith('/')) {
+				return <CTA data={{ to: node.data.uri, classes: 'mt-6 xx__mt-md-6' }}>{children}</CTA>
+			} else {
+				return (
+					<a href={node.data.uri} target="_blank" rel="noopener noreferrer" className={`text-success text-decoration-none`}>
+						{children}
+					</a>
+				)
+			}
+		},
 	},
 }
 
@@ -438,4 +461,4 @@ const cookieBannerTextOptions = {
 	},
 }
 
-export { heroTextOptions, defaultTextOptions, profileSectionTextOptions, infoBoxTextOptions, faqTextOptions, formTextOptions, legalTextOptions, cookieBannerTextOptions, mapTextOptions, kontaktTextOptions }
+export { heroTextOptions, defaultTextOptions, profileSectionTextOptions, infoBoxTextOptions, faqTextOptions, formTextOptions, legalTextOptions, cookieBannerTextOptions, mapTextOptions, kontaktTextOptions, buttonTextOptions }
