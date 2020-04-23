@@ -85,9 +85,12 @@ const NavContent = ({ pageInfo }) => {
 export default ({ pageInfo }) => {
 	return (
 		<header>
-			<Navbar bg="dark" expand="lg" variant="dark" collapseOnSelect className={Styles.navbar}>
+			<Navbar bg="light" expand="lg" variant="light" collapseOnSelect className={Styles.navbar}>
 				<NavContent pageInfo={pageInfo} />
 			</Navbar>
+			{/* <Navbar bg="dark" expand="lg" variant="dark" collapseOnSelect className={Styles.navbar}>
+				<NavContent pageInfo={pageInfo} />
+			</Navbar> */}
 		</header>
 	)
 }
