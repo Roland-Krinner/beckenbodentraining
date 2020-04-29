@@ -42,7 +42,7 @@ export default () => {
 				<Row>
 					<Col xs={12}>{documentToReactComponents(introJSON, defaultTextOptions)}</Col>
 				</Row>
-				<Row className="align-items-center no-gutters mt-10">
+				<Row className="align-items-center no-gutters mt-7 mt-md-10">
 					<Col xs={12} md={6}>
 						<Card className="rounded-lg shadow-lg mb-6 mb-md-0 card-border border-success" style={{ zIndex: 1 }}>
 							<Card.Body className="py-6 py-md-8">

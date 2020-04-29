@@ -103,9 +103,12 @@ const Kursangebot = ({ hash }) => {
 		}
 
 		return (
-			<>
+			<React.Fragment key={idx}>
 				<Container className={`${margin} kurs-${idx + 1}`}>
-					<h1 className="mb-0 h2">{headline}</h1>
+					<h1 className="mb-0 h2">
+						{headline}
+						{idx}
+					</h1>
 					<p className="mb-4 mb-lg-5 text-muted">{subline}</p>
 				</Container>
 				<Container className={Styles.mobileContainer}>
@@ -116,9 +119,9 @@ const Kursangebot = ({ hash }) => {
 									<h3 className="font-weight-bold mr-auto mb-0">{detailsHeadline}</h3>
 									<hr />
 									<Flickity options={{ contain: true, freeScroll: true, prevNextButtons: true, pageDots: false, draggable: true }}>
-										{termine.map(termin => {
+										{termine.map((termin, index) => {
 											return (
-												<>
+												<React.Fragment key={`${idx}-${index}`}>
 													<div className="carousel-cell">
 														<h5 className="font-weight-bold text-secondary mb-3 mb-sm-5">
 															<i className="fe fe-calendar mr-1"></i> {termin.headline}
@@ -127,8 +130,7 @@ const Kursangebot = ({ hash }) => {
 															<div>
 																{termin.wochentag.map((item, idx) => {
 																	return (
-																		<span className="badge badge-secondary-soft mr-1 align-top no-select xxtext-secondary" key={idx}>
-																			{/* <i className="fe fe-clock mr-2 text-secondary xxd-none xxd-sm-block"></i>*/}
+																		<span className="badge badge-secondary-soft align-top no-select xxtext-secondary" key={`badge1-${idx}`}>
 																			{item}
 																		</span>
 																	)
@@ -136,11 +138,10 @@ const Kursangebot = ({ hash }) => {
 															</div>
 														</div>
 														<div className="d-flex align-items-start">
-															{/* <i className="fe fe-calendar mr-2 text-secondary d-none d-sm-block"></i> */}
 															<div>
 																{termin.datum.map((item, idx) => {
 																	return (
-																		<span className="badge badge-secondary-soft mr-1 align-top no-select" key={idx}>
+																		<span className="badge badge-secondary-soft align-top no-select" key={`badge2-${idx}`}>
 																			{item}
 																		</span>
 																	)
@@ -148,7 +149,7 @@ const Kursangebot = ({ hash }) => {
 															</div>
 														</div>
 													</div>
-												</>
+												</React.Fragment>
 											)
 										})}
 									</Flickity>
@@ -171,7 +172,7 @@ const Kursangebot = ({ hash }) => {
 						</Col>
 					</Row>
 				</Container>
-			</>
+			</React.Fragment>
 		)
 	}
 

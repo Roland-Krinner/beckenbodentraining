@@ -172,7 +172,7 @@ const defaultTextOptions = {
 		),
 		[INLINES.HYPERLINK]: (node, children) => {
 			if (node.data.uri && node.data.uri.startsWith('/')) {
-				return <CTA data={{ to: node.data.uri, classes: '' }}>{children}</CTA>
+				return <CTA data={{ to: node.data.uri, classes: 'mt-5 mt-lg-2' }}>{children}</CTA>
 			} else {
 				return (
 					<a href={node.data.uri} target="_blank" rel="noopener noreferrer" className={`text-success text-decoration-none`}>

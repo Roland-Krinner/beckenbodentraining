@@ -85,10 +85,26 @@ const NavContent = ({ pageInfo }) => {
 export default ({ pageInfo }) => {
 	return (
 		<header>
-			<Navbar bg="light" expand="lg" variant="light" collapseOnSelect className={Styles.navbar}>
+			{/* <Navbar bg="light" expand="lg" variant="light" collapseOnSelect className={Styles.navbar}>
+				<NavContent pageInfo={pageInfo} />
+			</Navbar> */}
+			{/* <div>Sandra Läuger - Beckenbodentraining</div> */}
+			{/* <Navbar bg="brown-1" expand="lg" variant="dark" collapseOnSelect className={Styles.navbar}>
 				<NavContent pageInfo={pageInfo} />
 			</Navbar>
-			{/* <Navbar bg="dark" expand="lg" variant="dark" collapseOnSelect className={Styles.navbar}>
+			<Navbar bg="brown-2" expand="lg" variant="dark" collapseOnSelect className={Styles.navbar}>
+				<NavContent pageInfo={pageInfo} />
+			</Navbar> */}
+			<Navbar bg="brown-3" expand="lg" variant="dark" collapseOnSelect className={Styles.navbar}>
+				<NavContent pageInfo={pageInfo} />
+			</Navbar>
+			{/* <Navbar bg="brown-4" expand="lg" variant="dark" collapseOnSelect className={Styles.navbar}>
+				<NavContent pageInfo={pageInfo} />
+			</Navbar>
+			<Navbar bg="brown-5" expand="lg" variant="dark" collapseOnSelect className={Styles.navbar}>
+				<NavContent pageInfo={pageInfo} />
+			</Navbar>
+			<Navbar bg="brown-6" expand="lg" variant="dark" collapseOnSelect className={Styles.navbar}>
 				<NavContent pageInfo={pageInfo} />
 			</Navbar> */}
 		</header>
