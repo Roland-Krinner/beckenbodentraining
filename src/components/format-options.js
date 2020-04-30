@@ -340,12 +340,12 @@ const faqTextOptions = {
 				</span>
 			)
 		},
-		[BLOCKS.PARAGRAPH]: (node, children) => <p className={`font-size-lg text-gray-700 mb-7 mb-md-9`}>{children}</p>,
+		[BLOCKS.PARAGRAPH]: (node, children) => <p className={`font-size-lg text-gray-700 xxxmb-7 xxxmb-md-9`}>{children}</p>,
 		[INLINES.HYPERLINK]: (node, children) => {
 			if (node.data.uri && node.data.uri.startsWith('/')) {
 				return <CTA data={{ to: node.data.uri, classes: '' }}>{children}</CTA>
 			} else {
-				return <CtaExternal data={{ to: node.data.uri, classes: '' }}>{children}</CtaExternal>
+				return <CtaExternal data={{ to: node.data.uri, classes: 'mt-5 mt-md-7' }}>{children}</CtaExternal>
 				// return (
 				// 	<a href={node.data.uri} target="_blank" rel="noopener noreferrer" className={`text-success text-decoration-none`}>
 				// 		{children}

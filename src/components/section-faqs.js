@@ -3,7 +3,7 @@ import { Container, Row, Col, Card } from 'react-bootstrap'
 import { useStaticQuery, graphql } from 'gatsby'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { Section } from './local-components'
-import { faqTextOptions } from './format-options'
+import { faqTextOptions, profileSectionTextOptions } from './format-options'
 
 const FaqItem = ({ q, a, index }) => {
 	return (
@@ -13,7 +13,7 @@ const FaqItem = ({ q, a, index }) => {
 			</div>
 			<div className="ml-5">
 				<h4>{q}</h4>
-				<p className={`text-gray-700 mb-6 mb-md-8`}>{a}</p>
+				<p className={`text-gray-700 mb-6 mb-md-8`}>{documentToReactComponents(a, profileSectionTextOptions)}</p>
 			</div>
 		</div>
 	)
@@ -30,8 +30,8 @@ export default () => {
 						}
 						faQsListe {
 							frage
-							antwort {
-								antwort
+							antwortText {
+								json
 							}
 						}
 						kontaktBox {
@@ -46,7 +46,7 @@ export default () => {
 	const faqsList = data.allContentfulSeiteStartseite.edges[0].node.faQsListe
 	const faqsLength = faqsList.length
 	const kontaktBoxJSON = data.allContentfulSeiteStartseite.edges[0].node.kontaktBox.json
-	
+
 	return (
 		<Section data={{ classes: 'bg-white' }}>
 			<Container>
@@ -57,7 +57,7 @@ export default () => {
 					<Col className="col-12 col-md-6">
 						{faqsList.map((faq, idx) => {
 							if (idx < faqsLength / 2) {
-								return <FaqItem q={faq.frage} a={faq.antwort.antwort} index={idx} key={idx} />
+								return <FaqItem q={faq.frage} a={faq.antwortText.json} index={idx} key={idx} />
 							} else {
 								return ''
 							}
@@ -66,7 +66,7 @@ export default () => {
 					<Col className="col-12 col-md-6">
 						{faqsList.map((faq, idx) => {
 							if (idx >= faqsLength / 2) {
-								return <FaqItem q={faq.frage} a={faq.antwort.antwort} index={idx} key={idx} />
+								return <FaqItem q={faq.frage} a={faq.antwortText.json} index={idx} key={idx} />
 							} else {
 								return ''
 							}

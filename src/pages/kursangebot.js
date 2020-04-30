@@ -44,6 +44,7 @@ const Kursangebot = ({ hash }) => {
 								wochentag
 								datum
 							}
+							termineAnzeigen
 							detailsPreisHinweis
 							preisHinweisAnzeigen
 							buttonText
@@ -82,6 +83,7 @@ const Kursangebot = ({ hash }) => {
 		const subline = section.subline
 		const detailsHeadline = section.detailsHeadline
 		const termine = section.termine
+		const termineAnzeigen = section.termineAnzeigen
 		const detailsPreisHinweis = section.detailsPreisHinweis
 		const preisHinweisAnzeigen = section.preisHinweisAnzeigen
 		const buttonText = section.buttonText
@@ -91,7 +93,7 @@ const Kursangebot = ({ hash }) => {
 			return (
 				<button
 					type="button"
-					className={`btn btn-success btn-sm mt-4 ${classes}`}
+					className={`btn btn-success btn-sm mt-7 ${classes}`}
 					onClick={() => {
 						dispatch({ type: 'TOGGLE_REGISTRATION_MODAL' })
 						setPrefilledText({ text: `Ich interessiere mich für den Kurs: "${headline}"` })
@@ -105,10 +107,7 @@ const Kursangebot = ({ hash }) => {
 		return (
 			<React.Fragment key={idx}>
 				<Container className={`${margin} kurs-${idx + 1}`}>
-					<h1 className="mb-0 h2">
-						{headline}
-						{idx}
-					</h1>
+					<h1 className="mb-0 h2">{headline}</h1>
 					<p className="mb-4 mb-lg-5 text-muted">{subline}</p>
 				</Container>
 				<Container className={Styles.mobileContainer}>
@@ -118,11 +117,11 @@ const Kursangebot = ({ hash }) => {
 								<Card.Body className={`${Styles.cardBody}`}>
 									<h3 className="font-weight-bold mr-auto mb-0">{detailsHeadline}</h3>
 									<hr />
-									<Flickity options={{ contain: true, freeScroll: true, prevNextButtons: true, pageDots: false, draggable: true }}>
-										{termine.map((termin, index) => {
-											return (
-												<React.Fragment key={`${idx}-${index}`}>
-													<div className="carousel-cell">
+									{termineAnzeigen === true ? (
+										<Flickity options={{ contain: true, freeScroll: true, prevNextButtons: true, pageDots: false, draggable: true }}>
+											{termine.map((termin, index) => {
+												return (
+													<div className="carousel-cell" key={`${idx}-${index}`}>
 														<h5 className="font-weight-bold text-secondary mb-3 mb-sm-5">
 															<i className="fe fe-calendar mr-1"></i> {termin.headline}
 														</h5>
@@ -149,10 +148,12 @@ const Kursangebot = ({ hash }) => {
 															</div>
 														</div>
 													</div>
-												</React.Fragment>
-											)
-										})}
-									</Flickity>
+												)
+											})}
+										</Flickity>
+									) : (
+										''
+									)}
 									<RegisterBtn classes="d-block d-md-none" />
 									<div className="mt-7">{documentToReactComponents(beschreibungTextJSON, profileSectionTextOptions)}</div>
 									{preisHinweisAnzeigen === true ? (

@@ -95,7 +95,7 @@ export default ({ pageInfo }) => {
 			<Navbar bg="brown-2" expand="lg" variant="dark" collapseOnSelect className={Styles.navbar}>
 				<NavContent pageInfo={pageInfo} />
 			</Navbar> */}
-			<Navbar bg="brown-3" expand="lg" variant="dark" collapseOnSelect className={Styles.navbar}>
+			<Navbar bg="brown-2" expand="lg" variant="dark" collapseOnSelect className={Styles.navbar}>
 				<NavContent pageInfo={pageInfo} />
 			</Navbar>
 			{/* <Navbar bg="brown-4" expand="lg" variant="dark" collapseOnSelect className={Styles.navbar}>
