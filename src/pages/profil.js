@@ -2,9 +2,9 @@ import React from 'react'
 import { Container, Row, Col, Card } from 'react-bootstrap'
 import { useStaticQuery, graphql } from 'gatsby'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-import { defaultTextOptions, profileSectionTextOptions } from '../components/format-options'
+import { defaultTextOptions, profileSectionTextOptions, profileHeadlineTextOptions } from '../components/format-options'
 import Layout from '../components/layout'
-// import Head from '../components/head'
+import SEO from '../components/seo'
 import { SubPage } from '../components/local-components'
 import Styles from './profil.module.scss'
 
@@ -34,6 +34,7 @@ export default props => {
 			allContentfulSeiteProfil {
 				edges {
 					node {
+						title
 						introText {
 							json
 						}
@@ -49,8 +50,9 @@ export default props => {
 								url
 							}
 						}
-						profilHeadline
-						profilSubline
+						profilHeadline {
+							json
+						}
 						profilText {
 							json
 						}
@@ -65,18 +67,18 @@ export default props => {
 			}
 		}
 	`)
+	const title = data.allContentfulSeiteProfil.edges[0].node.title
 	const introTextJSON = data.allContentfulSeiteProfil.edges[0].node.introText.json
 	const featureBild = data.allContentfulSeiteProfil.edges[0].node.featureBild
 	const profilBild = data.allContentfulSeiteProfil.edges[0].node.profilBild
-	const profilHeadline = data.allContentfulSeiteProfil.edges[0].node.profilHeadline
-	const profilSubline = data.allContentfulSeiteProfil.edges[0].node.profilSubline
+	const profilHeadlineJSON = data.allContentfulSeiteProfil.edges[0].node.profilHeadline.json
 	const profilTextJSON = data.allContentfulSeiteProfil.edges[0].node.profilText.json
 	const sektionen = data.allContentfulSeiteProfil.edges[0].node.sektionen
 	const sektionenAnzeigen = data.allContentfulSeiteProfil.edges[0].node.sektionenAnzeigen
 
 	return (
 		<Layout pageInfo={{ pageName: 'profil', pageType: 'subPage' }}>
-			{/* <Head title="Profil" props={props} /> */}
+			<SEO title={title} pathname={props.location.pathname} />
 			<SubPage data={{ classes: 'bg-gray-200' }}>
 				<Container>{documentToReactComponents(introTextJSON, defaultTextOptions)}</Container>
 				<Container className={Styles.mobileContainer}>
@@ -92,11 +94,12 @@ export default props => {
 											<Image data={{ img: profilBild, classes: `${Styles.image} rounded-circle` }} />
 										</Col>
 										<Col xs={12} className="text-center">
-											<h3 className="font-weight-bold mt-3 mb-0">{profilHeadline}</h3>
-											<p className="text-muted">{profilSubline}</p>
+											{documentToReactComponents(profilHeadlineJSON, profileHeadlineTextOptions)}
+											{/* <h3 className="font-weight-bold mt-3 mb-0">{profilHeadline}</h3>
+											<p className="text-muted">{profilSubline}</p> */}
 										</Col>
 									</Row>
-									<Row noGutters className="mt-4">
+									<Row noGutters className="mt-6">
 										<Col>{documentToReactComponents(profilTextJSON, defaultTextOptions)}</Col>
 									</Row>
 								</Card.Body>

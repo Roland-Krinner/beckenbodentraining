@@ -13,7 +13,7 @@ const FaqItem = ({ q, a, index }) => {
 			</div>
 			<div className="ml-5">
 				<h4>{q}</h4>
-				<p className={`text-gray-700 mb-6 mb-md-8`}>{documentToReactComponents(a, profileSectionTextOptions)}</p>
+				<div className={`text-gray-700 mb-6 mb-md-8`}>{documentToReactComponents(a, profileSectionTextOptions)}</div>
 			</div>
 		</div>
 	)

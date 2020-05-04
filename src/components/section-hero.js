@@ -68,8 +68,11 @@ export default () => {
 								<DesktopImages />
 							</Flickity>
 							<div className="shape shape-left shape-fluid-y svg-shim text-white">
-								<svg viewBox="0 0 100 1544" fill="none" xmlns="http://www.w3.org/2000/svg">
+								{/* <svg viewBox="0 0 100 1544" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path d="M0 0H100V386L50 1158V1544H0V0Z" fill="currentColor" />
+								</svg> */}
+								<svg viewBox="0 0 200 1544" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M0 0H200V386L100 1158V1544H0V0Z" fill="currentColor" />
 								</svg>
 							</div>
 						</div>

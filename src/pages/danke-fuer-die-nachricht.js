@@ -4,7 +4,7 @@ import { useStaticQuery, graphql } from 'gatsby'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { defaultTextOptions } from '../components/format-options'
 import Layout from '../components/layout'
-// import Head from '../components/head'
+import SEO from '../components/seo'
 import { SubPage } from '../components/local-components'
 
 export default props => {
@@ -13,6 +13,7 @@ export default props => {
 			allContentfulSeiteDankeFurDieNachricht {
 				edges {
 					node {
+						title
 						text {
 							json
 						}
@@ -21,11 +22,12 @@ export default props => {
 			}
 		}
 	`)
+	const title = data.allContentfulSeiteDankeFurDieNachricht.edges[0].node.title
 	const textJSON = data.allContentfulSeiteDankeFurDieNachricht.edges[0].node.text.json
 
 	return (
 		<Layout pageInfo={{ pageName: 'danke', pageType: 'subPage', classes: 'bg-gray-200' }}>
-			{/* <Head title="404" props={props}/> */}
+			<SEO title={title} pathname={props.location.pathname} />
 			<SubPage data={{ classes: '' }}>
 				<Container>
 					<Row>

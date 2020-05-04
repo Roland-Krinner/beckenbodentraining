@@ -63,6 +63,13 @@ const NavContent = ({ pageInfo }) => {
 						</Link>
 					</Nav.Item>
 					<Nav.Item className={Styles.navItem}>
+						<Link to="/bebo-konzept">
+							<Nav.Link as="span" eventKey="bebo-konzept" className={Styles.navLink}>
+								<span>Das BeBo Konzept</span>
+							</Nav.Link>
+						</Link>
+					</Nav.Item>
+					<Nav.Item className={Styles.navItem}>
 						<Link to="/profil">
 							<Nav.Link as="span" eventKey="profil" className={Styles.navLink}>
 								<span>Profil</span>

@@ -4,7 +4,7 @@ import { useStaticQuery, graphql } from 'gatsby'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { defaultTextOptions, legalTextOptions } from '../components/format-options'
 import Layout from '../components/layout'
-// import Head from '../components/head'
+import SEO from '../components/seo'
 import { SubPage } from '../components/local-components'
 import Styles from './datenschutz.module.scss'
 
@@ -14,6 +14,7 @@ export default props => {
 			allContentfulSeiteDatenschutz {
 				edges {
 					node {
+						title
 						introText {
 							json
 						}
@@ -25,12 +26,13 @@ export default props => {
 			}
 		}
 	`)
+	const title = data.allContentfulSeiteDatenschutz.edges[0].node.title
 	const introTextJSON = data.allContentfulSeiteDatenschutz.edges[0].node.introText.json
 	const contentTextJSON = data.allContentfulSeiteDatenschutz.edges[0].node.contentText.json
 
 	return (
 		<Layout pageInfo={{ pageName: 'datenschutz', pageType: 'subPage' }}>
-			{/* <Head title="Impressum" props={props}/> */}
+			<SEO title={title} pathname={props.location.pathname} />
 			<SubPage data={{ classes: 'bg-gray-200' }}>
 				<Container>{documentToReactComponents(introTextJSON, defaultTextOptions)}</Container>
 				<Container className={Styles.mobileContainer}>

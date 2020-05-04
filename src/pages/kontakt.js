@@ -3,7 +3,7 @@ import { Container, Row, Col, Card } from 'react-bootstrap'
 import { useStaticQuery, graphql } from 'gatsby'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import Layout from '../components/layout'
-// import Head from '../components/head'
+import SEO from '../components/seo'
 import { SubPage } from '../components/local-components'
 import ContactForm from '../components/contact-form'
 import { defaultTextOptions, kontaktTextOptions, formTextOptions } from '../components/format-options'
@@ -15,6 +15,7 @@ export default props => {
 			allContentfulSeiteKontakt {
 				edges {
 					node {
+						title
 						introText {
 							json
 						}
@@ -29,13 +30,14 @@ export default props => {
 			}
 		}
 	`)
+	const title = data.allContentfulSeiteKontakt.edges[0].node.title
 	const introTextJSON = data.allContentfulSeiteKontakt.edges[0].node.introText.json
 	const inahaltTextJSON = data.allContentfulSeiteKontakt.edges[0].node.inhaltText.json
 	const formularTextJSON = data.allContentfulSeiteKontakt.edges[0].node.formularText.json
 
 	return (
 		<Layout pageInfo={{ pageName: 'kontakt', pageType: 'subPage' }}>
-			{/* <Head title="Kontakt" props={props} /> */}
+			<SEO title={title} pathname={props.location.pathname} />
 			<SubPage data={{ classes: 'bg-gray-200 kontakt-page' }}>
 				<Container className="d-block d-lg-none">
 					<Row>

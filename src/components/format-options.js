@@ -232,7 +232,7 @@ const profileSectionTextOptions = {
 	renderNode: {
 		[BLOCKS.HEADING_1]: (node, children) => <h1 className={`mb-0`}>{children}</h1>,
 		[BLOCKS.HEADING_6]: (node, children) => <p className={`font-size-lg mb-4 mb-lg-5 text-muted`}>{children}</p>,
-		[BLOCKS.HEADING_3]: (node, children) => <h3 className={`xxx__mb-0 font-weight-bold`}>{children}</h3>,
+		[BLOCKS.HEADING_3]: (node, children) => <h3 className={`font-weight-bold`}>{children}</h3>,
 		[BLOCKS.PARAGRAPH]: (node, children) => {
 			if (node.content.length === 1 && node.content[0].value === '') {
 				return ''
@@ -258,9 +258,10 @@ const profileSectionTextOptions = {
 				return <CTA data={{ to: node.data.uri, classes: '' }}>{children}</CTA>
 			} else {
 				return (
-					<a href={node.data.uri} target="_blank" rel="noopener noreferrer" className={`text-success text-decoration-none`}>
-						{children}
-					</a>
+					<CtaExternal data={{ to: node.data.uri, classes: 'mt-5 mt-md-7' }}>{children}</CtaExternal>
+					// <a href={node.data.uri} target="_blank" rel="noopener noreferrer" className={`text-success text-decoration-none`}>
+					// 	{children}
+					// </a>
 				)
 			}
 		},
@@ -319,7 +320,7 @@ const buttonTextOptions = {
 	renderNode: {
 		[INLINES.HYPERLINK]: (node, children) => {
 			if (node.data.uri && node.data.uri.startsWith('/')) {
-				return <CTA data={{ to: node.data.uri, classes: 'mt-6 xx__mt-md-6' }}>{children}</CTA>
+				return <CTA data={{ to: node.data.uri, classes: 'mt-6' }}>{children}</CTA>
 			} else {
 				return (
 					<a href={node.data.uri} target="_blank" rel="noopener noreferrer" className={`text-success text-decoration-none`}>
@@ -340,7 +341,7 @@ const faqTextOptions = {
 				</span>
 			)
 		},
-		[BLOCKS.PARAGRAPH]: (node, children) => <p className={`font-size-lg text-gray-700 xxxmb-7 xxxmb-md-9`}>{children}</p>,
+		[BLOCKS.PARAGRAPH]: (node, children) => <p className={`font-size-lg text-gray-700 mb-7 mb-md-9`}>{children}</p>,
 		[INLINES.HYPERLINK]: (node, children) => {
 			if (node.data.uri && node.data.uri.startsWith('/')) {
 				return <CTA data={{ to: node.data.uri, classes: '' }}>{children}</CTA>
@@ -461,4 +462,11 @@ const cookieBannerTextOptions = {
 	},
 }
 
-export { heroTextOptions, defaultTextOptions, profileSectionTextOptions, infoBoxTextOptions, faqTextOptions, formTextOptions, legalTextOptions, cookieBannerTextOptions, mapTextOptions, kontaktTextOptions, buttonTextOptions }
+const profileHeadlineTextOptions = {
+	renderNode: {
+		[BLOCKS.HEADING_3]: (node, children) => <h3 className={`font-weight-bold mt-3 mb-0`}>{children}</h3>,
+		[BLOCKS.PARAGRAPH]: (node, children) => <p className={`text-muted mb-0`}>{children}</p>,
+	},
+}
+
+export { heroTextOptions, defaultTextOptions, profileSectionTextOptions, infoBoxTextOptions, faqTextOptions, formTextOptions, legalTextOptions, cookieBannerTextOptions, mapTextOptions, kontaktTextOptions, buttonTextOptions, profileHeadlineTextOptions }

@@ -4,7 +4,7 @@ import { useStaticQuery, graphql } from 'gatsby'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { formTextOptions, profileSectionTextOptions } from '../components/format-options'
 import Layout from '../components/layout'
-// import Head from '../components/head'
+import SEO from '../components/seo'
 import { SubPage } from '../components/local-components'
 import ContactForm from '../components/contact-form'
 import ModalDialogRegistration from '../components/modal-dialog-registration'
@@ -14,7 +14,7 @@ import Flickity from '../components/flickity'
 import Styles from './kursangebot.module.scss'
 import '../scss/kursangebot.scss'
 
-const Kursangebot = ({ hash }) => {
+const Kursangebot = (props, { hash }) => {
 	useEffect(() => {
 		if (hash !== '') {
 			setTimeout(() => {
@@ -31,6 +31,7 @@ const Kursangebot = ({ hash }) => {
 			allContentfulSeiteKursangebot {
 				edges {
 					node {
+						title
 						formularHeadline
 						formularText {
 							json
@@ -57,6 +58,7 @@ const Kursangebot = ({ hash }) => {
 			}
 		}
 	`)
+	const title = data.allContentfulSeiteKursangebot.edges[0].node.title
 	const sektionen = data.allContentfulSeiteKursangebot.edges[0].node.sektionen
 	const formularHeadline = data.allContentfulSeiteKursangebot.edges[0].node.formularHeadline
 	const formularTextJSON = data.allContentfulSeiteKursangebot.edges[0].node.formularText.json
@@ -179,7 +181,7 @@ const Kursangebot = ({ hash }) => {
 
 	return (
 		<Layout pageInfo={{ pageName: 'kursangebot', pageType: 'subPage', classes: 'kursangebot' }}>
-			{/* <Head title="Profil" props={props} /> */}
+			<SEO title={title} pathname={props.location.pathname} />
 			<SubPage data={{ classes: 'bg-gray-200' }}>
 				<div className="scrollable-wrapper d-block d-lg-none mb-4">
 					<div className="scrollable">
