@@ -51,9 +51,9 @@ export default ({ pageInfo: { pageType } }) => {
 	const websiteName = data.allContentfulDatenKontaktdaten.edges[0].node.websiteName
 	const websiteUrl = data.allContentfulDatenKontaktdaten.edges[0].node.websiteUrl
 
-	const headline = 'font-weight-bold text-uppercase text-white mt-6'
-	const listItem = 'text-white-70'
-	const listItemWrapper = 'text-white-70 my-0'
+	const headline = 'font-weight-bold text-uppercase text-white mt-6 h5'
+	const listItem = 'xxx__text-white-70 text-white'
+	const listItemWrapper = 'xxx__text-white-70 text-white my-0'
 
 	const classesFooter = pageType === 'homePage' ? 'mt-n14 mt-md-n16' : 'pt-12 pt-md-15'
 	const classesContainer = pageType === 'homePage' ? 'pt-14 pt-md-16' : 'pt-md-8 pt-xl-12'
