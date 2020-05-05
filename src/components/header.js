@@ -90,8 +90,11 @@ const NavContent = ({ pageInfo }) => {
 }
 
 export default ({ pageInfo }) => {
+
+	const classesHeader = pageInfo.pageType === 'homePage' ? 'mb-n11 mb-xl-n12' : 'bg-gray-200'
+
 	return (
-		<header className={`mb-n11 mb-xl-n12 ${Styles.header}`}>
+		<header className={`${classesHeader} ${Styles.header}`}>
 			<Navbar expand="lg" variant="dark" collapseOnSelect className={Styles.navbar}>
 				<NavContent pageInfo={pageInfo} />
 			</Navbar>

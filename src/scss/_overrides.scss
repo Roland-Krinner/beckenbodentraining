@@ -136,6 +136,7 @@
 	.navbar-nav .nav-item .nav-link:focus,
 	.navbar-nav .nav-item .nav-link:hover {
 		@media (max-width: 991.98px) {
+			// color: $successBase !important;
 			color: $successBase !important;
 		}
 	}
@@ -181,7 +182,8 @@
 	@media (min-width: 992px) {
 		&:hover span::before,
 		&.active span::before {
-			background-color: $successBase;
+			// background-color: $successBase;
+			background-color: white;
 		}
 	}
 }
