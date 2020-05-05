@@ -74,7 +74,8 @@ export default () => {
 					</Col>
 				</Row>
 			</Container>
-			<Container className={`mt-4 mt-md-6 mt-lg-8`} style={{ zIndex: 2 }}>
+			{/* <Container className={`mt-4 mt-md-6 mt-lg-8`} style={{ zIndex: 2 }}> */}
+			<Container className={`mt-7 xxx__mt-md-6 mt-lg-8 container`} style={{ zIndex: 2 }}>
 				<Row className={`justify-content-center text-center`}>
 					<Col xs={12} sm={10} lg={8}>
 						<Card className={`shadow-dark-sm overflow-hidden card-border border-success`}>

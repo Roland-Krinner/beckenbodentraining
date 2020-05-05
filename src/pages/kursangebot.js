@@ -14,7 +14,7 @@ import Flickity from '../components/flickity'
 import Styles from './kursangebot.module.scss'
 import '../scss/kursangebot.scss'
 
-const Kursangebot = (props, { hash }) => {
+const Kursangebot = ({ hash, location }) => {
 	useEffect(() => {
 		if (hash !== '') {
 			setTimeout(() => {
@@ -181,7 +181,7 @@ const Kursangebot = (props, { hash }) => {
 
 	return (
 		<Layout pageInfo={{ pageName: 'kursangebot', pageType: 'subPage', classes: 'kursangebot' }}>
-			<SEO title={title} pathname={props.location.pathname} />
+			<SEO title={title} pathname={location.pathname} />
 			<SubPage data={{ classes: 'bg-gray-200' }}>
 				<div className="scrollable-wrapper d-block d-lg-none mb-4">
 					<div className="scrollable">

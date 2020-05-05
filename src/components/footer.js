@@ -55,12 +55,23 @@ export default ({ pageInfo: { pageType } }) => {
 	const listItem = 'text-white-70'
 	const listItemWrapper = 'text-white-70 my-0'
 
-	const homePageClassesFooter = pageType === 'homePage' ? 'mt-n12 mt-md-n15' : ''
-	const homePageClassesContainer = pageType === 'homePage' ? 'pt-12 pt-md-14 pt-lg-15' : ''
+	const classesFooter = pageType === 'homePage' ? 'mt-n14 mt-md-n16' : 'pt-12 pt-md-15'
+	const classesContainer = pageType === 'homePage' ? 'pt-14 pt-md-16' : 'pt-md-8 pt-xl-12'
+	const svgFill = pageType === 'homePage' ? '#ffffff' : '#f1f4f8'
 
 	return (
-		<footer className={`bg-dark position-relative ${homePageClassesFooter}`}>
-			<Container className={`py-8 py-md-12 ${homePageClassesContainer}`}>
+		<footer className={`bg-dark position-relative ${classesFooter} ${Styles.footer}`}>
+			<div className={Styles.waveWrapper}>
+				<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1920 280" className={Styles.waveSvg}>
+					<g fill={svgFill}>
+						<path d="M1920 0v19.387c-211.21 136.245-517.564 173.305-919.061 111.18C679.068 80.763 345.422 103.907 0 200L-2 0h1922z"></path>
+						<path d="M1920 0v4c-252.04 171.948-554.875 231.087-908.506 177.417C361.105 82.709-2.15 200 .254 200 1.858 200 1.106 133.333-2 0h1922z" fillOpacity=".35"></path>
+						<path d="M1920 0v29.724c-230.661 164.917-529.816 221.768-897.464 170.553C568.815 137.072 198.92 150.114 0 269V0h1920z" fillOpacity=".17"></path>
+						<path d="M1920 0v29.724c-223.98 145.48-526.685 188.553-908.112 129.22C630.46 99.61 293.3 122.961.407 229V0H1920z" fillOpacity=".45"></path>
+					</g>
+				</svg>
+			</div>
+			<Container className={`pb-8 pb-md-12 ${classesContainer}`}>
 				<Row noGutters>
 					<Col xs={12} md={6} lg={12} xl={3}>
 						<div>
@@ -136,10 +147,10 @@ export default ({ pageInfo: { pageType } }) => {
 					</Col>
 				</Row>
 			</Container>
-			<Container fluid className="py-5 bg-black">
+			<Container fluid className="py-5 bg-white xxx__bg-black">
 				<Row>
 					<Col xs={12} className="d-sm-flex flex-row-reverse">
-						<p className="text-white-70 mb-0 text-center text-sm-left">
+						<p className="xxx__text-white-70 mb-0 text-center text-sm-left">
 							<Link to="/impressum" className="text-reset pr-3">
 								Impressum
 							</Link>

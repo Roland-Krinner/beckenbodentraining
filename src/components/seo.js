@@ -10,7 +10,6 @@ const SEO = ({ title, lang, pathname }) => {
 				allContentfulDatenMetadaten {
 					edges {
 						node {
-							title
 							description
 							keywords
 							siteName
@@ -27,7 +26,7 @@ const SEO = ({ title, lang, pathname }) => {
 		`
 	)
 
-	const pageTitle = `${title || site.allContentfulDatenMetadaten.edges[0].node.title} | ${site.allContentfulDatenMetadaten.edges[0].node.siteName}`
+	const pageTitle = `${title} | ${site.allContentfulDatenMetadaten.edges[0].node.siteName}`
 	const metaDescription = site.allContentfulDatenMetadaten.edges[0].node.description
 	const keywords = site.allContentfulDatenMetadaten.edges[0].node.keywords
 	const hotSpot = 'top_right'
