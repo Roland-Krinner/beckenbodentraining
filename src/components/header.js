@@ -91,14 +91,14 @@ const NavContent = ({ pageInfo }) => {
 
 export default ({ pageInfo }) => {
 
-	const classesHeader = pageInfo.pageType === 'homePage' ? 'mb-n11 mb-xl-n12' : 'bg-gray-200'
+	// const classesHeader = pageInfo.pageType === 'homePage' ? 'mb-n11 mb-xl-n12' : 'bg-gray-200'
 
 	return (
-		<header className={`${classesHeader} ${Styles.header}`}>
+		<header className={`${Styles.header}`}>
 			<Navbar expand="lg" variant="dark" collapseOnSelect className={Styles.navbar}>
 				<NavContent pageInfo={pageInfo} />
 			</Navbar>
-			<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1920 400">
+			{/* <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1920 400">
 				<defs>
 					<linearGradient id="gradient" gradientTransform="rotate(55)">
 						<stop stopColor="#dc3545" offset="0%"></stop>
@@ -116,7 +116,7 @@ export default ({ pageInfo }) => {
 					<path d="M1 170.75V99C373.115 4.216 705.281-4.951 997.5 71.5c365.667 95.667 673.5 73.406 923.5-66.781l-1 166.031H1z" fillOpacity=".3" fill="#FFF" transform="translate(0, 230)"></path>
 					<path d="M1 170v-67C400.333-1.333 744.167-19 1032.5 50c432.5 103.5 754 19.219 888.5-45.281l-1 166.031L1 170z" fillOpacity=".35" fill="#FFF" transform="translate(0, 230)"></path>
 				</g>
-			</svg>
+			</svg> */}
 			{/* <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1920 570">
 				<defs>
 					<linearGradient id="gradient" gradientTransform="rotate(55)">

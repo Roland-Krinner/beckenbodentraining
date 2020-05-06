@@ -5,10 +5,16 @@
 
 .navbar {
 	transition: none !important;
-	position: absolute !important;
-	top: 0;
-	left: 0;
-	width: 100%;
+	//background-image: linear-gradient(-74deg, #7c69ef 0%, #df4759 100%);
+	// background-image: linear-gradient(-74deg, #fda614 0%, #df4759 100%);
+	//background-image: linear-gradient(-74deg, #42ba96 0%, #28a745 100%);
+	// background-image: linear-gradient(-74deg, #46cab2 0%, #41ca61 100%);
+	background-image: linear-gradient(-15deg, #fad961 0%, #fd7e14 35%, #dc3545 100%);
+
+	// position: absolute !important;
+	// top: 0;
+	// left: 0;
+	// width: 100%;
 	// @media (max-width: 320px) {
 	// 	padding: 1rem calc(20px - 0.75rem) 1rem 20px !important;
 	// }
@@ -76,10 +82,10 @@ $BrandHeight: 38px;
 }
 
 // .nav-decoration {
-	// position: relative;
-	// width: 100%;
-	// height: 140px;
-	// background-color: greenyellow;
+// position: relative;
+// width: 100%;
+// height: 140px;
+// background-color: greenyellow;
 // }
 
 // .wave-wrapper {
@@ -93,11 +99,11 @@ $BrandHeight: 38px;
 // 	min-width: 1000px;
 // 	overflow: hidden;
 
-	//md
-	// @media (min-width: 768px) {
-	// 	height: 280px;
-	// 	min-width: 1920px;
-	// }
+//md
+// @media (min-width: 768px) {
+// 	height: 280px;
+// 	min-width: 1920px;
+// }
 // }
 
 // .wave-svg {

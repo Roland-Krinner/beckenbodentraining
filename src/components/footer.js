@@ -55,13 +55,13 @@ export default ({ pageInfo: { pageType } }) => {
 	const listItem = 'xxx__text-white-70 text-white'
 	const listItemWrapper = 'xxx__text-white-70 text-white my-0'
 
-	const classesFooter = pageType === 'homePage' ? 'mt-n14 mt-md-n16' : 'pt-12 pt-md-15'
-	const classesContainer = pageType === 'homePage' ? 'pt-14 pt-md-16' : 'pt-md-8 pt-xl-12'
-	const svgFill = pageType === 'homePage' ? '#ffffff' : '#f1f4f8'
+	const classesFooter = pageType === 'homePage' ? 'mt-n14 mt-md-n15' : 'pt-12 pt-md-15'
+	const classesContainer = pageType === 'homePage' ? 'pt-14 pt-md-15' : 'pt-md-8 pt-xl-12'
+	// const svgFill = pageType === 'homePage' ? '#ffffff' : '#f1f4f8'
 
 	return (
 		<footer className={`bg-dark position-relative ${classesFooter} ${Styles.footer}`}>
-			<div className={Styles.waveWrapper}>
+			{/* <div className={Styles.waveWrapper}>
 				<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1920 280" className={Styles.waveSvg}>
 					<g fill={svgFill}>
 						<path d="M1920 0v19.387c-211.21 136.245-517.564 173.305-919.061 111.18C679.068 80.763 345.422 103.907 0 200L-2 0h1922z"></path>
@@ -70,8 +70,8 @@ export default ({ pageInfo: { pageType } }) => {
 						<path d="M1920 0v29.724c-223.98 145.48-526.685 188.553-908.112 129.22C630.46 99.61 293.3 122.961.407 229V0H1920z" fillOpacity=".45"></path>
 					</g>
 				</svg>
-			</div>
-			<Container className={`pb-8 pb-md-12 ${classesContainer}`}>
+			</div> */}
+			<Container className={`pb-9 pb-md-12 ${classesContainer}`}>
 				<Row noGutters>
 					<Col xs={12} md={6} lg={12} xl={3}>
 						<div>
