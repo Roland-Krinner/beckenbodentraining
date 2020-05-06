@@ -55,8 +55,8 @@ export default ({ pageInfo: { pageType } }) => {
 	const listItem = 'xxx__text-white-70 text-white'
 	const listItemWrapper = 'xxx__text-white-70 text-white my-0'
 
-	const classesFooter = pageType === 'homePage' ? 'mt-n14 mt-md-n15' : 'pt-12 pt-md-15'
-	const classesContainer = pageType === 'homePage' ? 'pt-14 pt-md-15' : 'pt-md-8 pt-xl-12'
+	const classesFooter = pageType === 'homePage' ? 'mt-n14 mt-md-n15' : 'xxpt-12 xxpt-md-12'
+	const classesContainer = pageType === 'homePage' ? 'pt-14 pt-md-15' : 'pt-9 pt-md-12'
 	// const svgFill = pageType === 'homePage' ? '#ffffff' : '#f1f4f8'
 
 	return (
