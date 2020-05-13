@@ -2,7 +2,7 @@ import React from 'react'
 import { Container, Row, Col, Card } from 'react-bootstrap'
 import { useStaticQuery, graphql } from 'gatsby'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-import { defaultTextOptions, infoBoxTextOptions, buttonTextOptions } from './format-options'
+import { mutedTextOptions, infoBoxTextOptions, buttonTextOptions } from './format-options'
 
 export default () => {
 	const data = useStaticQuery(graphql`
@@ -40,7 +40,7 @@ export default () => {
 		<section className="pt-8 pt-md-12 normalize-last-p bg-gray-200">
 			<Container>
 				<Row>
-					<Col xs={12}>{documentToReactComponents(introJSON, defaultTextOptions)}</Col>
+					<Col xs={12}>{documentToReactComponents(introJSON, mutedTextOptions)}</Col>
 				</Row>
 				<Row className="align-items-center no-gutters mt-7 mt-md-10">
 					<Col xs={12} md={6}>
