@@ -60,7 +60,7 @@ export default ({ pageInfo: { pageType } }) => {
 	// const svgFill = pageType === 'homePage' ? '#ffffff' : '#f1f4f8'
 
 	return (
-		<footer className={`bg-dark position-relative ${classesFooter} ${Styles.footer}`}>
+		<footer className={`bg-dark-green position-relative ${classesFooter} ${Styles.footer}`}>
 			{/* <div className={Styles.waveWrapper}>
 				<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1920 280" className={Styles.waveSvg}>
 					<g fill={svgFill}>

@@ -1,13 +1,13 @@
 @import '../scss/colors';
 @import '../scss/mixins';
 
-.bg-img-wrapper {
-	width: 100%;
-	height: 100%;
-	background-position: top center;
-	background-size: cover;
-	background-repeat: no-repeat;
-}
+// .bg-img-wrapper {
+// 	width: 100%;
+// 	height: 100%;
+// 	background-position: top center;
+// 	background-size: cover;
+// 	background-repeat: no-repeat;
+// }
 
 .card-body {
 	@include cardBodyPaddingDefault;
@@ -21,35 +21,35 @@
 	}
 }
 
-.min-height {
-	//md
-	@media (min-width: 768px) {
-		min-height: 500px;
-	}
+// .min-height {
+// 	//md
+// 	@media (min-width: 768px) {
+// 		min-height: 500px;
+// 	}
 
-	// lg
-	@media (min-width: 992px) {
-		min-height: 550px;
-	}
+// 	// lg
+// 	@media (min-width: 992px) {
+// 		min-height: 550px;
+// 	}
 
-	// xl
-	@media (min-width: 1200px) {
-		min-height: 600px;
-	}
-}
+// 	// xl
+// 	@media (min-width: 1200px) {
+// 		min-height: 600px;
+// 	}
+// }
 
-.profile-img-wrapper {
-	// < lg
-	@media (max-width: 991px) {
-		padding-left: 0;
-		padding-right: 0;
-	}
-}
+// .profile-img-wrapper {
+// 	// < lg
+// 	@media (max-width: 991px) {
+// 		padding-left: 0;
+// 		padding-right: 0;
+// 	}
+// }
 
 .image {
 	width: 100%;
 	height: auto;
-	border: 4px solid darken($lightBase, 20%);
+	// border: 4px solid darken($lightBase, 20%);
 }
 
 .mobile-container {

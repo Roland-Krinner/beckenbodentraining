@@ -28,6 +28,10 @@
 $green: #63897f;
 $darkGreen: #425953;
 
+.bg-dark-green {
+	background-color: $darkGreen;
+}
+
 .badge-success-soft {
 	background-color: rgba(99, 137, 127, 0.1);
 	color: $green;

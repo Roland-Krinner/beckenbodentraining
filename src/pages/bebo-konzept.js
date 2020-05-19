@@ -35,14 +35,23 @@ export default props => {
 			<SEO title={title} pathname={props.location.pathname} />
 			<SubPage data={{ classes: 'bg-gray-200' }}>
 				<Container>{documentToReactComponents(introTextJSON, defaultTextOptions)}</Container>
-				<Container className={Styles.mobileContainer}>
-					<Card className="shadow-dark-sm">
-						<Row>
-							<Col xs={12}>
+				<Container className={Styles.xx__mobileContainer}>
+					<Row>
+						<Col xs="12" lg="9">
+							<Card className="shadow-dark-sm">
 								<Card.Body className={`${Styles.cardBody}`}>{documentToReactComponents(textJSON, profileSectionTextOptions)}</Card.Body>
-							</Col>
-						</Row>
-					</Card>
+							</Card>
+						</Col>
+						<Col xs="12" lg="3" className="mt-4 mt-lg-0">
+							<Card className="shadow-dark-sm">
+								<Card.Body className={`${Styles.cardBody}`}>
+									<img src="//www.beckenboden.com/media/docs/bebo-intern/BeBo/2011_BeBo_Logo_Vektor_blau_rgb.jpg" alt="Avatar" class={Styles.image} />
+									<hr />
+									<p class="h6 text-gray-700 mb-0">Für mehr Lebensqualität und Freude.</p>
+								</Card.Body>
+							</Card>
+						</Col>
+					</Row>
 				</Container>
 			</SubPage>
 		</Layout>
