@@ -3,6 +3,7 @@ import { useStaticQuery, graphql } from 'gatsby'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import SectionHero from '../components/section-hero'
+import SectionAlert from '../components/section-alert'
 import SectionIntro from '../components/section-intro'
 import SectionProfile from '../components/section-profile'
 import SectionInfo from '../components/section-info'
@@ -31,6 +32,7 @@ export default props => {
 			<SEO title={title} pathname={props.location.pathname} />
 			<SectionHero />
 			<main>
+				<SectionAlert />
 				<SectionIntro />
 				<SectionProfile />
 				<SectionInfo />

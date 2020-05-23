@@ -21,6 +21,13 @@ export default props => {
 						text {
 							json
 						}
+						logo {
+							fluid(maxWidth: 640, quality: 80) {
+								src
+							}
+							title
+						}
+						logoText
 					}
 				}
 			}
@@ -29,6 +36,9 @@ export default props => {
 	const title = data.allContentfulSeiteBeBoKonzept.edges[0].node.title
 	const introTextJSON = data.allContentfulSeiteBeBoKonzept.edges[0].node.introText.json
 	const textJSON = data.allContentfulSeiteBeBoKonzept.edges[0].node.text.json
+	const logo = data.allContentfulSeiteBeBoKonzept.edges[0].node.logo.fluid.src
+	const logoTitle = data.allContentfulSeiteBeBoKonzept.edges[0].node.logo.title
+	const logoText = data.allContentfulSeiteBeBoKonzept.edges[0].node.logoText
 
 	return (
 		<Layout pageInfo={{ pageName: 'bebo-konzept', pageType: 'subPage' }}>
@@ -44,10 +54,10 @@ export default props => {
 						</Col>
 						<Col xs="12" lg="3" className="mt-4 mt-lg-0">
 							<Card className="shadow-dark-sm">
-								<Card.Body className={`${Styles.cardBody}`}>
-									<img src="//www.beckenboden.com/media/docs/bebo-intern/BeBo/2011_BeBo_Logo_Vektor_blau_rgb.jpg" alt="Avatar" class={Styles.image} />
+								<Card.Body className={`${Styles.cardBody} ${Styles.logoBox}`}>
+									<img src={logo} alt={logoTitle} class={Styles.image} />
 									<hr />
-									<p class="h6 text-gray-700 mb-0">Für mehr Lebensqualität und Freude.</p>
+									<p class="h6 text-gray-700 mb-0">{logoText}</p>
 								</Card.Body>
 							</Card>
 						</Col>
