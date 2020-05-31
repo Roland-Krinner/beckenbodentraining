@@ -65,7 +65,7 @@ const NavContent = ({ pageInfo }) => {
 					<Nav.Item className={Styles.navItem}>
 						<Link to="/bebo-konzept">
 							<Nav.Link as="span" eventKey="bebo-konzept" className={Styles.navLink}>
-								<span>Das BeBo Konzept</span>
+								<span>Das BeBo® Konzept</span>
 							</Nav.Link>
 						</Link>
 					</Nav.Item>

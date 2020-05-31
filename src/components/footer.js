@@ -95,7 +95,7 @@ export default ({ pageInfo: { pageType } }) => {
 							</div>
 							<div className={`${listItemWrapper}`}>
 								<Link to="/bebo-konzept" className={`${listItem}`}>
-									Das BeBo Konzept
+									Das BeBo® Konzept
 								</Link>
 							</div>
 							<div className={`${listItemWrapper}`}>
