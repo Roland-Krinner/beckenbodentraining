@@ -35,7 +35,7 @@
     "gatsby-transformer-remark": "^2.7.1",
     "imagesloaded": "^4.1.4",
     "mapbox-gl": "^1.9.1",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "prop-types": "^15.7.2",
     "query-string": "^6.12.1",
     "react": "^16.12.0",
