@@ -5,7 +5,7 @@ import { BLOCKS, INLINES } from '@contentful/rich-text-types'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { GlobalDispatchContext, GlobalStateContext } from '../context/GlobalContextProvider'
 import { ToggleMapCheckbox } from './local-components'
-import Styles from './modal-dialog.module.scss'
+import * as Styles from './modal-dialog.module.scss'
 
 const BrandData = ({ data: { searchStr, customClasses } }) => {
 	if (searchStr === '$$KartenEinstellungen$$') {
@@ -14,7 +14,7 @@ const BrandData = ({ data: { searchStr, customClasses } }) => {
 	return ''
 }
 
-export default () => {
+const Dialog = () => {
 	const dispatch = useContext(GlobalDispatchContext)
 	const state = useContext(GlobalStateContext)
 
@@ -25,7 +25,7 @@ export default () => {
 					node {
 						headline
 						text {
-							json
+							raw
 						}
 						buttonText
 					}
@@ -34,7 +34,7 @@ export default () => {
 		}
 	`)
 	const headline = data.allContentfulKomponenteKartenEinstellungen.edges[0].node.headline
-	const textJSON = data.allContentfulKomponenteKartenEinstellungen.edges[0].node.text.json
+	const textJSON = JSON.parse(data.allContentfulKomponenteKartenEinstellungen.edges[0].node.text.raw)
 	const buttonText = data.allContentfulKomponenteKartenEinstellungen.edges[0].node.buttonText
 
 	const modalTextOptions = {
@@ -104,3 +104,6 @@ export default () => {
 		</Modal>
 	)
 }
+
+
+export default Dialog

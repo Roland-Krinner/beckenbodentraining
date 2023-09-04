@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { GlobalDispatchContext, GlobalStateContext } from '../context/GlobalContextProvider'
 import { Link } from 'gatsby'
-import Styles from './local-components.module.scss'
+import * as Styles from './local-components.module.scss'
 
 const SubPage = ({ children, data: { classes } }) => {
 	return <main className={`pt-5 pt-lg-8 pb-8 pb-sm-10 ${classes}`}>{children}</main>
@@ -29,7 +29,7 @@ const CtaExternal = ({ children, data: { to, classes } }) => {
 	)
 }
 
-const SVG = ({ svg, file, alt }) => {
+const Svg = ({ svg, file, alt }) => {
 	if (file.contentType === 'image/svg+xml') {
 		if (svg && svg.content) {
 			return <div dangerouslySetInnerHTML={{ __html: svg.content }} />
@@ -68,4 +68,4 @@ const ToggleMapCheckbox = () => {
 	)
 }
 
-export { SubPage, Section, SVG, CTA, CtaExternal, ToggleMapCheckbox }
+export { SubPage, Section, Svg, CTA, CtaExternal, ToggleMapCheckbox }

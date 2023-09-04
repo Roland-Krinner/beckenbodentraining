@@ -1,13 +1,11 @@
 import React, { useContext } from 'react'
 import { Toast } from 'react-bootstrap'
 import { GlobalDispatchContext, GlobalStateContext } from '../context/GlobalContextProvider'
-import Styles from './notification.module.scss'
+import * as Styles from './notification.module.scss'
 
-export default () => {
+const Notification = () => {
 	const dispatch = useContext(GlobalDispatchContext)
 	const state = useContext(GlobalStateContext)
-
-	// console.log('show notification', state.notificationVisible)
 
 	return (
 		<div className={`${Styles.notificationWrapper}`}>
@@ -33,3 +31,5 @@ export default () => {
 		</div>
 	)
 }
+
+export default Notification

@@ -19,33 +19,33 @@ const FaqItem = ({ q, a, index }) => {
 	)
 }
 
-export default () => {
+const SectionFAQs = () => {
 	const data = useStaticQuery(graphql`
 		query {
 			allContentfulSeiteStartseite {
 				edges {
 					node {
 						faQsText {
-							json
+							raw
 						}
 						faQsListe {
 							frage
 							antwortText {
-								json
+								raw
 							}
 						}
 						kontaktBox {
-							json
+							raw
 						}
 					}
 				}
 			}
 		}
 	`)
-	const faQsTextJSON = data.allContentfulSeiteStartseite.edges[0].node.faQsText.json
+	const faQsTextJSON = JSON.parse(data.allContentfulSeiteStartseite.edges[0].node.faQsText.raw)
 	const faqsList = data.allContentfulSeiteStartseite.edges[0].node.faQsListe
 	const faqsLength = faqsList.length
-	const kontaktBoxJSON = data.allContentfulSeiteStartseite.edges[0].node.kontaktBox.json
+	const kontaktBoxJSON = JSON.parse(data.allContentfulSeiteStartseite.edges[0].node.kontaktBox.raw)
 
 	return (
 		<Section data={{ classes: 'bg-white' }}>
@@ -57,7 +57,7 @@ export default () => {
 					<Col className="col-12 col-md-6">
 						{faqsList.map((faq, idx) => {
 							if (idx < faqsLength / 2) {
-								return <FaqItem q={faq.frage} a={faq.antwortText.json} index={idx} key={idx} />
+								return <FaqItem q={faq.frage} a={JSON.parse(faq.antwortText.raw)} index={idx} key={idx} />
 							} else {
 								return ''
 							}
@@ -66,7 +66,7 @@ export default () => {
 					<Col className="col-12 col-md-6">
 						{faqsList.map((faq, idx) => {
 							if (idx >= faqsLength / 2) {
-								return <FaqItem q={faq.frage} a={faq.antwortText.json} index={idx} key={idx} />
+								return <FaqItem q={faq.frage} a={JSON.parse(faq.antwortText.raw)} index={idx} key={idx} />
 							} else {
 								return ''
 							}
@@ -74,8 +74,7 @@ export default () => {
 					</Col>
 				</Row>
 			</Container>
-			{/* <Container className={`mt-4 mt-md-6 mt-lg-8`} style={{ zIndex: 2 }}> */}
-			<Container className={`mt-7 xxx__mt-md-6 mt-lg-8 container`} style={{ zIndex: 2 }}>
+			<Container className={`mt-7 mt-lg-8 container`} style={{ zIndex: 2 }}>
 				<Row className={`justify-content-center text-center`}>
 					<Col xs={12} sm={10} lg={8}>
 						<Card className={`shadow-dark-sm overflow-hidden card-border border-success`}>
@@ -87,3 +86,5 @@ export default () => {
 		</Section>
 	)
 }
+
+export default SectionFAQs

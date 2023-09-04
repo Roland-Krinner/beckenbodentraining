@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { navigate } from 'gatsby'
 import { Form, Col, Button } from 'react-bootstrap'
+import Row from 'react-bootstrap/Row'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { GlobalDispatchContext } from '../context/GlobalContextProvider'
-import Styles from './contact-form.module.scss'
+import * as Styles from './contact-form.module.scss'
 
 const onRegisterSuccess = navUrl => {
 	navigate(navUrl)
@@ -15,7 +16,7 @@ const encode = data => {
 		.join('&')
 }
 
-export default ({ data: { prefilledText, lgCol } }) => {
+const KontaktFormular = ({ data: { prefilledText, lgCol } }) => {
 	const dispatch = useContext(GlobalDispatchContext)
 
 	// independent states
@@ -135,16 +136,18 @@ export default ({ data: { prefilledText, lgCol } }) => {
 	return (
 		<Form name="Kontakt Formular" method="POST" data-netlify="true" data-netlify-recaptcha="true" action="/danke-fuer-die-nachricht" onSubmit={onSubmit} noValidate>
 			<input type="hidden" name="form-name" value="Kontakt Formular" />
-			<Form.Row>
-				<Form.Group as={Col} xs={12} md={12} lg={lgColName} controlId="formName" className="mb-2">
-					<Form.Label className={`h6 no-select mb-1 text-gray-700`}>Name (Pflichtfeld)</Form.Label>
-					<Form.Control type="text" placeholder="Name" name="name" spellCheck="false" onChange={onFieldChange} className={`border-${fieldsValidation.name} ${Styles.formControl}`} />
-				</Form.Group>
-				<Form.Group as={Col} xs={12} md={12} lg={lgColEmail} controlId="formEmail" className="mb-2">
-					<Form.Label className={`h6 no-select mb-1 text-gray-700`}>E-Mail (Pflichtfeld)</Form.Label>
-					<Form.Control type="email" placeholder="E-Mail Adresse" name="email" spellCheck="false" onChange={onFieldChange} className={`border-${fieldsValidation.email} ${Styles.formControl}`} />
-				</Form.Group>
-			</Form.Row>
+			<Form> 
+				 <Row>
+						<Form.Group as={Col} xs={12} md={12} lg={lgColName} controlId="formName" className="mb-2">
+							<Form.Label className={`h6 no-select mb-1 text-gray-700`}>Name (Pflichtfeld)</Form.Label>
+							<Form.Control type="text" placeholder="Name" name="name" spellCheck="false" onChange={onFieldChange} className={`border-${fieldsValidation.name} ${Styles.formControl}`} />
+						</Form.Group>
+						<Form.Group as={Col} xs={12} md={12} lg={lgColEmail} controlId="formEmail" className="mb-2">
+							<Form.Label className={`h6 no-select mb-1 text-gray-700`}>E-Mail (Pflichtfeld)</Form.Label>
+							<Form.Control type="email" placeholder="E-Mail Adresse" name="email" spellCheck="false" onChange={onFieldChange} className={`border-${fieldsValidation.email} ${Styles.formControl}`} />
+						</Form.Group>
+				</Row> 
+			 </Form> 
 			<Form.Group controlId="formTextarea" className="mb-2">
 				<Form.Label className={`h6 no-select mb-1 text-gray-700`}>Nachricht (Pflichtfeld)</Form.Label>
 				<Form.Control as="textarea" rows="3" placeholder="Nachricht" name="message" spellCheck="false" value={fieldValue.message} onChange={onFieldChange} className={`border-${fieldsValidation.message} ${Styles.formControl}`} />
@@ -161,3 +164,5 @@ export default ({ data: { prefilledText, lgCol } }) => {
 		</Form>
 	)
 }
+
+export default KontaktFormular

@@ -4,11 +4,11 @@ import { useStaticQuery, graphql } from 'gatsby'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { defaultTextOptions, legalTextOptions } from '../components/format-options'
 import Layout from '../components/layout'
-import SEO from '../components/seo'
+import Seo from '../components/seo'
 import { SubPage } from '../components/local-components'
-import Styles from './datenschutz.module.scss'
+import * as Styles from './datenschutz.module.scss'
 
-export default props => {
+const Datenschutz = props => {
 	const data = useStaticQuery(graphql`
 		query {
 			allContentfulSeiteDatenschutz {
@@ -16,10 +16,10 @@ export default props => {
 					node {
 						title
 						introText {
-							json
+							raw
 						}
 						contentText {
-							json
+							raw
 						}
 					}
 				}
@@ -27,12 +27,12 @@ export default props => {
 		}
 	`)
 	const title = data.allContentfulSeiteDatenschutz.edges[0].node.title
-	const introTextJSON = data.allContentfulSeiteDatenschutz.edges[0].node.introText.json
-	const contentTextJSON = data.allContentfulSeiteDatenschutz.edges[0].node.contentText.json
+	const introTextJSON = JSON.parse(data.allContentfulSeiteDatenschutz.edges[0].node.introText.raw)
+	const contentTextJSON = JSON.parse(data.allContentfulSeiteDatenschutz.edges[0].node.contentText.raw)
 
 	return (
 		<Layout pageInfo={{ pageName: 'datenschutz', pageType: 'subPage' }}>
-			<SEO title={title} pathname={props.location.pathname} />
+			<Seo title={title} pathname={props.location.pathname} />
 			<SubPage data={{ classes: 'bg-gray-200' }}>
 				<Container>{documentToReactComponents(introTextJSON, defaultTextOptions)}</Container>
 				<Container className={Styles.mobileContainer}>
@@ -48,3 +48,5 @@ export default props => {
 		</Layout>
 	)
 }
+
+export default Datenschutz

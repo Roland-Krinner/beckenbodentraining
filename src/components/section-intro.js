@@ -4,37 +4,37 @@ import { useStaticQuery, graphql } from 'gatsby'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { mutedTextOptions, infoBoxTextOptions, buttonTextOptions } from './format-options'
 
-export default () => {
+const SectionIntro = () => {
 	const data = useStaticQuery(graphql`
 		query {
 			allContentfulSeiteStartseite {
 				edges {
 					node {
 						intro {
-							json
+							raw
 						}
 						infoBox1 {
-							json
+							raw
 						}
 						buttonInfoBox1 {
-							json
+							raw
 						}
 						infoBox2 {
-							json
+							raw
 						}
 						buttonInfoBox2 {
-							json
+							raw
 						}
 					}
 				}
 			}
 		}
 	`)
-	const introJSON = data.allContentfulSeiteStartseite.edges[0].node.intro.json
-	const infoBox1JSON = data.allContentfulSeiteStartseite.edges[0].node.infoBox1.json
-	const buttonInfoBox1JSON = data.allContentfulSeiteStartseite.edges[0].node.buttonInfoBox1.json
-	const infoBox2JSON = data.allContentfulSeiteStartseite.edges[0].node.infoBox2.json
-	const buttonInfoBox2JSON = data.allContentfulSeiteStartseite.edges[0].node.buttonInfoBox2.json
+	const introJSON = JSON.parse(data.allContentfulSeiteStartseite.edges[0].node.intro.raw)
+	const infoBox1JSON = JSON.parse(data.allContentfulSeiteStartseite.edges[0].node.infoBox1.raw)
+	const buttonInfoBox1JSON = JSON.parse(data.allContentfulSeiteStartseite.edges[0].node.buttonInfoBox1.raw)
+	const infoBox2JSON = JSON.parse(data.allContentfulSeiteStartseite.edges[0].node.infoBox2.raw)
+	const buttonInfoBox2JSON = JSON.parse(data.allContentfulSeiteStartseite.edges[0].node.buttonInfoBox2.raw)
 
 	return (
 		<section className="pt-8 pt-md-12 normalize-last-p bg-gray-200">
@@ -72,3 +72,6 @@ export default () => {
 		</section>
 	)
 }
+
+
+export default SectionIntro

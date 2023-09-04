@@ -5,7 +5,7 @@ import { BLOCKS } from '@contentful/rich-text-types'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { defaultTextOptions } from './format-options'
 import { Section } from './local-components'
-import Styles from './section-profile.module.scss'
+import * as Styles from './section-profile.module.scss'
 
 const imgOptions = {
 	renderNode: {
@@ -17,6 +17,7 @@ const imgOptions = {
 		[BLOCKS.HEADING_6]: (node, children) => '',
 		[BLOCKS.PARAGRAPH]: (node, children) => '',
 		[BLOCKS.EMBEDDED_ASSET]: (node, children) => {
+			console.log(node)
 			const title = node.data.target.fields.title['en-US']
 			const url = node.data.target.fields.file['en-US'].url
 			return <img src={url} alt={title} className={`${Styles.image} rounded-circle`} />
@@ -24,21 +25,33 @@ const imgOptions = {
 	},
 }
 
-export default () => {
+const SectionProfile = () => {
 	const data = useStaticQuery(graphql`
 		query {
 			allContentfulSeiteStartseite {
 				edges {
 					node {
 						profil {
-							json
+							raw
+							references {
+								... on ContentfulAsset {
+								  contentful_id
+								  title
+								  __typename
+								  gatsbyImageData(layout: FIXED, width: 640)
+								}
+							  }  
 						}
 					}
 				}
 			}
 		}
 	`)
-	const profilJSON = data.allContentfulSeiteStartseite.edges[0].node.profil.json
+	const profil = data.allContentfulSeiteStartseite.edges[0].node.profil
+	const profilJSON = JSON.parse(profil.raw)
+	console.log(profil)
+	const profilBildTitel = profil.references[0].title
+	const profilBildUrl = profil.references[0].gatsbyImageData.images.fallback.src
 
 	return (
 		<>
@@ -54,7 +67,8 @@ export default () => {
 					<Container>
 						<Row className="justify-content-center align-items-center">
 							<Col xs={6} sm={4} lg={3} className={Styles.profileImgWrapper}>
-								{documentToReactComponents(profilJSON, imgOptions)}
+								{/* {documentToReactComponents(profilJSON, imgOptions)} */}
+								<img src={profilBildUrl} alt={profilBildTitel} className={`${Styles.image} rounded-circle`} />
 							</Col>
 							<Col md={12} lg={9} className="mt-5 mt-lg-0 pl-lg-8 normalize-last-p">
 								{documentToReactComponents(profilJSON, defaultTextOptions)}
@@ -66,3 +80,5 @@ export default () => {
 		</>
 	)
 }
+
+export default SectionProfile

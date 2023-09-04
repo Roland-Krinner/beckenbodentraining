@@ -5,7 +5,7 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { heroTextOptions } from './format-options'
 import Flickity from './flickity'
 
-export default () => {
+const SectionHero = () => {
 	const data = useStaticQuery(graphql`
 		query {
 			allContentfulSeiteStartseite {
@@ -13,17 +13,14 @@ export default () => {
 					node {
 						hero {
 							text {
-								json
+								raw
 							}
 							bilder {
 								title
 								file {
 									url
 								}
-								fluid(maxWidth: 1600, quality: 75) {
-									sizes
-									srcSet
-								}
+								gatsbyImageData(breakpoints: 10)
 							}
 						}
 					}
@@ -31,14 +28,14 @@ export default () => {
 			}
 		}
 	`)
-	const heroTextJSON = data.allContentfulSeiteStartseite.edges[0].node.hero.text.json
+	const heroTextJSON = JSON.parse(data.allContentfulSeiteStartseite.edges[0].node.hero.text.raw)
 	const heroSlides = data.allContentfulSeiteStartseite.edges[0].node.hero.bilder
 
 	const MobileImages = () => {
 		return heroSlides.map((slide, idx) => {
-			const defaultImage = slide.file.url
-			const srcSet = slide.fluid.srcSet
-			const sizes = slide.fluid.sizes
+			const defaultImage = slide.file.url	
+			const srcSet = slide.gatsbyImageData.images.sources[0].srcSet
+			const sizes = slide.gatsbyImageData.images.sources[0].sizes
 			const alt = slide.title
 			return (
 				<div className="w-100" key={idx}>
@@ -68,9 +65,6 @@ export default () => {
 								<DesktopImages />
 							</Flickity>
 							<div className="shape shape-left shape-fluid-y svg-shim text-white">
-								{/* <svg viewBox="0 0 100 1544" fill="none" xmlns="http://www.w3.org/2000/svg">
-									<path d="M0 0H100V386L50 1158V1544H0V0Z" fill="currentColor" />
-								</svg> */}
 								<svg viewBox="0 0 200 1544" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path d="M0 0H200V386L100 1158V1544H0V0Z" fill="currentColor" />
 								</svg>
@@ -85,3 +79,5 @@ export default () => {
 		</section>
 	)
 }
+
+export default SectionHero

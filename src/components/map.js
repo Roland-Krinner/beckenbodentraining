@@ -3,7 +3,7 @@ import { useStaticQuery, graphql } from 'gatsby'
 import { GlobalStateContext } from '../context/GlobalContextProvider'
 import mapboxgl from 'mapbox-gl'
 
-export default props => {
+const Map = props => {
 	const state = useContext(GlobalStateContext)
 
 	const data = useStaticQuery(graphql`
@@ -93,3 +93,6 @@ export default props => {
 
 	return <div ref={mapContainer} className={props.classes}></div>
 }
+
+
+export default Map

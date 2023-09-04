@@ -4,14 +4,14 @@ import { useStaticQuery, graphql } from 'gatsby'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { formTextOptions, profileSectionTextOptions } from '../components/format-options'
 import Layout from '../components/layout'
-import SEO from '../components/seo'
+import Seo from '../components/seo'
 import { SubPage } from '../components/local-components'
 import ContactForm from '../components/contact-form'
 import ModalDialogRegistration from '../components/modal-dialog-registration'
 import { GlobalDispatchContext } from '../context/GlobalContextProvider'
 import withLocation from '../components/withLocation'
 import Flickity from '../components/flickity'
-import Styles from './kursangebot.module.scss'
+import * as Styles from './kursangebot.module.scss'
 import '../scss/kursangebot.scss'
 
 const Kursangebot = ({ hash, location }) => {
@@ -34,7 +34,7 @@ const Kursangebot = ({ hash, location }) => {
 						title
 						formularHeadline
 						formularText {
-							json
+							raw
 						}
 						sektionen {
 							headline
@@ -50,7 +50,7 @@ const Kursangebot = ({ hash, location }) => {
 							preisHinweisAnzeigen
 							buttonText
 							beschreibungText {
-								json
+								raw
 							}
 						}
 					}
@@ -61,7 +61,7 @@ const Kursangebot = ({ hash, location }) => {
 	const title = data.allContentfulSeiteKursangebot.edges[0].node.title
 	const sektionen = data.allContentfulSeiteKursangebot.edges[0].node.sektionen
 	const formularHeadline = data.allContentfulSeiteKursangebot.edges[0].node.formularHeadline
-	const formularTextJSON = data.allContentfulSeiteKursangebot.edges[0].node.formularText.json
+	const formularTextJSON = JSON.parse(data.allContentfulSeiteKursangebot.edges[0].node.formularText.raw)
 
 	const NavCard = ({ data: { section, idx } }) => {
 		return (
@@ -89,7 +89,7 @@ const Kursangebot = ({ hash, location }) => {
 		const detailsPreisHinweis = section.detailsPreisHinweis
 		const preisHinweisAnzeigen = section.preisHinweisAnzeigen
 		const buttonText = section.buttonText
-		const beschreibungTextJSON = section.beschreibungText.json
+		const beschreibungTextJSON = JSON.parse(section.beschreibungText.raw)
 
 		const RegisterBtn = ({ classes = '' }) => {
 			return (
@@ -181,7 +181,7 @@ const Kursangebot = ({ hash, location }) => {
 
 	return (
 		<Layout pageInfo={{ pageName: 'kursangebot', pageType: 'subPage', classes: 'kursangebot' }}>
-			<SEO title={title} pathname={location.pathname} />
+			<Seo title={title} pathname={location.pathname} />
 			<SubPage data={{ classes: 'bg-gray-200' }}>
 				<div className="scrollable-wrapper d-block d-lg-none mb-4">
 					<div className="scrollable">

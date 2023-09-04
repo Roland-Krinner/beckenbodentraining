@@ -3,9 +3,9 @@ import { Container, Row, Col, Alert } from 'react-bootstrap'
 import { useStaticQuery, graphql } from 'gatsby'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { defaultTextOptions } from './format-options'
-import Styles from './section-alert.module.scss'
+import * as Styles from './section-alert.module.scss'
 
-export default () => {
+const SectionAlert = () => {
 	const data = useStaticQuery(graphql`
 		query {
 			allContentfulSeiteStartseite {
@@ -14,7 +14,7 @@ export default () => {
 						hinweis {
 							headline
 							text {
-								json
+								raw
 							}
 						}
 						hinweisAnzeigen
@@ -24,7 +24,7 @@ export default () => {
 		}
 	`)
 	const headline = data.allContentfulSeiteStartseite.edges[0].node.hinweis.headline
-	const textJSON = data.allContentfulSeiteStartseite.edges[0].node.hinweis.text.json
+	const textJSON = JSON.parse(data.allContentfulSeiteStartseite.edges[0].node.hinweis.text.raw)
 	const hinweisAnzeigen = data.allContentfulSeiteStartseite.edges[0].node.hinweisAnzeigen
 
 	return hinweisAnzeigen === true ? (
@@ -34,7 +34,7 @@ export default () => {
 					<Col>
 						<Alert variant="danger" className={`${Styles.alert}`}>
 							<h5 className="mb-0">
-								<i class="fe fe-alert-triangle mr-2"></i>
+								<i className="fe fe-alert-triangle mr-2"></i>
 								{headline}
 							</h5>
 						</Alert>
@@ -47,3 +47,5 @@ export default () => {
 		''
 	)
 }
+
+export default SectionAlert

@@ -2,8 +2,8 @@ import React from 'react'
 import { Link } from 'gatsby'
 import { Navbar, Nav } from 'react-bootstrap'
 import { useStaticQuery, graphql } from 'gatsby'
-import { SVG } from './local-components'
-import Styles from './header.module.scss'
+import { Svg } from './local-components'
+import * as Styles from './header.module.scss'
 
 const NavContent = ({ pageInfo }) => {
 	const data = useStaticQuery(graphql`
@@ -35,11 +35,11 @@ const NavContent = ({ pageInfo }) => {
 		<>
 			{pageInfo.pageType && pageInfo.pageType === 'homePage' ? (
 				<div className={Styles.brand}>
-					<SVG svg={svg} file={file} alt={alt} />
+					<Svg svg={svg} file={file} alt={alt} />
 				</div>
 			) : (
 				<Link to="/" className={Styles.brand}>
-					<SVG svg={svg} file={file} alt={alt} />
+					<Svg svg={svg} file={file} alt={alt} />
 				</Link>
 			)}
 			<Navbar.Toggle />
@@ -89,7 +89,7 @@ const NavContent = ({ pageInfo }) => {
 	)
 }
 
-export default ({ pageInfo }) => {
+const Header = ({ pageInfo }) => {
 	return (
 		<header className={`${Styles.header}`}>
 			<Navbar bg="ochre" expand="lg" variant="dark" collapseOnSelect className={Styles.navbar}>
@@ -98,3 +98,5 @@ export default ({ pageInfo }) => {
 		</header>
 	)
 }
+
+export default Header

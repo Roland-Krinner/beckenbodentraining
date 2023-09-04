@@ -22,7 +22,7 @@ const ShowModalCta = () => {
 	)
 }
 
-export default () => {
+const SectionMap = () => {
 	const state = useContext(GlobalStateContext)
 	const data = useStaticQuery(graphql`
 		query {
@@ -30,7 +30,7 @@ export default () => {
 				edges {
 					node {
 						kartenText {
-							json
+							raw
 						}
 					}
 				}
@@ -38,7 +38,7 @@ export default () => {
 		}
 	`)
 
-	const mapTextJSON = data.allContentfulSeiteStartseite.edges[0].node.kartenText.json
+	const mapTextJSON = JSON.parse(data.allContentfulSeiteStartseite.edges[0].node.kartenText.raw)
 
 	// workaround, because direct binding to global state does not work in production
 	const [mapVisible, setMapVisible] = useState(true)
@@ -56,9 +56,6 @@ export default () => {
 						<div className="position-relative h-100 vw-50 float-right d-none d-md-block">
 							<div className={mapVisible ? 'w-100 h-100' : 'w-100 h-100 bg-gray-300 d-flex justify-content-center align-items-center'}>{mapVisible ? <Map classes="w-100 h-100" /> : <ShowModalCta />}</div>
 							<div className="shape shape-right shape-fluid-y svg-shim text-white">
-								{/* <svg viewBox="0 0 100 1544" fill="none" xmlns="http://www.w3.org/2000/svg">
-									<path d="M0 386V0H100V1544H50V1158L0 386Z" fill="currentColor" />
-								</svg> */}
 								<svg viewBox="0 0 200 1544" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path d="M0 386V0H200 V1544 H100V1158L0 386Z" fill="currentColor" />
 								</svg>
@@ -73,3 +70,5 @@ export default () => {
 		</section>
 	)
 }
+
+export default SectionMap

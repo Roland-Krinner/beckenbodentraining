@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Helmet } from 'react-helmet'
 import { useStaticQuery, graphql } from 'gatsby'
 
-const SEO = ({ title, lang, pathname }) => {
+const Seo = ({ title, lang, pathname }) => {
 	const site = useStaticQuery(
 		graphql`
 			query {
@@ -30,10 +30,8 @@ const SEO = ({ title, lang, pathname }) => {
 	const metaDescription = site.allContentfulDatenMetadaten.edges[0].node.description
 	const keywords = site.allContentfulDatenMetadaten.edges[0].node.keywords
 	const hotSpot = 'top_right'
-	// const twitterSizes = '1200x628'
 	const ogSizes = '1200x630'
 	const sharerImageBaseUrl = site.allContentfulDatenMetadaten.edges[0].node.socialImage.file.url
-	// const twitter_image = `https:${sharerImageBaseUrl}?fit=thumb&f=${hotSpot}&w=${twitterSizes.split('x')[0]}&h=${twitterSizes.split('x')[1]}`
 	const og_image = `https:${sharerImageBaseUrl}?fit=thumb&f=${hotSpot}&w=${ogSizes.split('x')[0]}&h=${ogSizes.split('x')[1]}`
 	const canonical = pathname ? `${site.allContentfulDatenMetadaten.edges[0].node.siteUrl}${pathname}` : null
 
@@ -113,15 +111,15 @@ const SEO = ({ title, lang, pathname }) => {
 	)
 }
 
-SEO.defaultProps = {
+Seo.defaultProps = {
 	title: '',
 	lang: 'de',
 }
 
-SEO.propTypes = {
+Seo.propTypes = {
 	title: PropTypes.string.isRequired,
 	lang: PropTypes.string,
 	pathname: PropTypes.string,
 }
 
-export default SEO
+export default Seo

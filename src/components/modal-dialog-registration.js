@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
 import { Modal } from 'react-bootstrap'
 import { GlobalDispatchContext, GlobalStateContext } from '../context/GlobalContextProvider'
-import Styles from './modal-dialog-registration.module.scss'
+import * as Styles from './modal-dialog-registration.module.scss'
 
-export default ({ children, data: { headline } }) => {
+const Registration = ({ children, data: { headline } }) => {
 	const dispatch = useContext(GlobalDispatchContext)
 	const state = useContext(GlobalStateContext)
 	const modalHeadline = headline || ''
@@ -26,3 +26,6 @@ export default ({ children, data: { headline } }) => {
 		</Modal>
 	)
 }
+
+
+export default Registration

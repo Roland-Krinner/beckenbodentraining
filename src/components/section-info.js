@@ -5,21 +5,21 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { Section } from './local-components'
 import { featureMutedTextOptions } from './format-options'
 
-export default () => {
+const SectionInfo = () => {
 	const data = useStaticQuery(graphql`
 		query {
 			allContentfulSeiteStartseite {
 				edges {
 					node {
 						infoText {
-							json
+							raw
 						}
 					}
 				}
 			}
 		}
 	`)
-	const infoTextJSON = data.allContentfulSeiteStartseite.edges[0].node.infoText.json
+	const infoTextJSON = JSON.parse(data.allContentfulSeiteStartseite.edges[0].node.infoText.raw)
 
 	return (
 		<Section data={{ classes: 'bg-gray-200 normalize-last-p' }}>
@@ -31,3 +31,5 @@ export default () => {
 		</Section>
 	)
 }
+
+export default SectionInfo

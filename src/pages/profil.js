@@ -4,9 +4,9 @@ import { useStaticQuery, graphql } from 'gatsby'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { defaultTextOptions, profileSectionTextOptions, profileHeadlineTextOptions } from '../components/format-options'
 import Layout from '../components/layout'
-import SEO from '../components/seo'
+import Seo from '../components/seo'
 import { SubPage } from '../components/local-components'
-import Styles from './profil.module.scss'
+import * as Styles from './profil.module.scss'
 
 const Image = ({ data: { img, classes } }) => {
 	const alt = img.title ? img.title : ''
@@ -19,7 +19,7 @@ const CardSection = ({ data: { section, sektionenAnzeigen } }) => {
 		<Card className="shadow-dark-sm mt-20 mt-sm-7">
 			<Row>
 				<Col xs={12}>
-					<Card.Body className={`${Styles.cardBody}`}>{documentToReactComponents(section.text.json, profileSectionTextOptions)}</Card.Body>
+					<Card.Body className={`${Styles.cardBody}`}>{documentToReactComponents(JSON.parse(section.text.raw), profileSectionTextOptions)}</Card.Body>
 				</Col>
 			</Row>
 		</Card>
@@ -28,7 +28,7 @@ const CardSection = ({ data: { section, sektionenAnzeigen } }) => {
 	)
 }
 
-export default props => {
+const Profil = props => {
 	const data = useStaticQuery(graphql`
 		query {
 			allContentfulSeiteProfil {
@@ -36,7 +36,7 @@ export default props => {
 					node {
 						title
 						introText {
-							json
+							raw
 						}
 						featureBild {
 							title
@@ -51,14 +51,14 @@ export default props => {
 							}
 						}
 						profilHeadline {
-							json
+							raw
 						}
 						profilText {
-							json
+							raw
 						}
 						sektionen {
 							text {
-								json
+								raw
 							}
 						}
 						sektionenAnzeigen
@@ -68,22 +68,22 @@ export default props => {
 		}
 	`)
 	const title = data.allContentfulSeiteProfil.edges[0].node.title
-	const introTextJSON = data.allContentfulSeiteProfil.edges[0].node.introText.json
+	const introTextJSON = JSON.parse(data.allContentfulSeiteProfil.edges[0].node.introText.raw)
 	const featureBild = data.allContentfulSeiteProfil.edges[0].node.featureBild
 	const profilBild = data.allContentfulSeiteProfil.edges[0].node.profilBild
-	const profilHeadlineJSON = data.allContentfulSeiteProfil.edges[0].node.profilHeadline.json
-	const profilTextJSON = data.allContentfulSeiteProfil.edges[0].node.profilText.json
+	const profilHeadlineJSON = JSON.parse(data.allContentfulSeiteProfil.edges[0].node.profilHeadline.raw)
+	const profilTextJSON = JSON.parse(data.allContentfulSeiteProfil.edges[0].node.profilText.raw)
 	const sektionen = data.allContentfulSeiteProfil.edges[0].node.sektionen
 	const sektionenAnzeigen = data.allContentfulSeiteProfil.edges[0].node.sektionenAnzeigen
 
 	return (
 		<Layout pageInfo={{ pageName: 'profil', pageType: 'subPage' }}>
-			<SEO title={title} pathname={props.location.pathname} />
+			<Seo title={title} pathname={props.location.pathname} />
 			<SubPage data={{ classes: 'bg-gray-200' }}>
 				<Container>{documentToReactComponents(introTextJSON, defaultTextOptions)}</Container>
 				<Container className={Styles.mobileContainer}>
 					<Card className="shadow-dark-sm overflow-hidden">
-						<Row noGutters>
+						<Row>
 							<Col xs={4} className="d-none d-md-flex">
 								<div style={{ backgroundImage: `url(${featureBild.file.url})` }} className={Styles.bgImgWrapper}></div>
 							</Col>
@@ -99,7 +99,7 @@ export default props => {
 											<p className="text-muted">{profilSubline}</p> */}
 										</Col>
 									</Row>
-									<Row noGutters className="mt-6">
+									<Row className="mt-6">
 										<Col>{documentToReactComponents(profilTextJSON, defaultTextOptions)}</Col>
 									</Row>
 								</Card.Body>
@@ -114,3 +114,5 @@ export default props => {
 		</Layout>
 	)
 }
+
+export default Profil

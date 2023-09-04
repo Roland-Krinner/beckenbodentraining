@@ -4,11 +4,11 @@ import { useStaticQuery, graphql } from 'gatsby'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { defaultTextOptions, profileSectionTextOptions } from '../components/format-options'
 import Layout from '../components/layout'
-import SEO from '../components/seo'
+import Seo from '../components/seo'
 import { SubPage } from '../components/local-components'
-import Styles from './bebo-konzept.module.scss'
+import * as Styles from './bebo-konzept.module.scss'
 
-export default props => {
+const Konzept = props => {
 	const data = useStaticQuery(graphql`
 		query {
 			allContentfulSeiteBeBoKonzept {
@@ -16,15 +16,15 @@ export default props => {
 					node {
 						title
 						introText {
-							json
+							raw
 						}
 						text {
-							json
+							raw
 						}
 						logo {
-							fluid(maxWidth: 640, quality: 80) {
-								src
-							}
+							file {
+								url
+							  }
 							title
 						}
 						logoText
@@ -34,18 +34,20 @@ export default props => {
 		}
 	`)
 	const title = data.allContentfulSeiteBeBoKonzept.edges[0].node.title
-	const introTextJSON = data.allContentfulSeiteBeBoKonzept.edges[0].node.introText.json
-	const textJSON = data.allContentfulSeiteBeBoKonzept.edges[0].node.text.json
-	const logo = data.allContentfulSeiteBeBoKonzept.edges[0].node.logo.fluid.src
+	const introTextJSON = JSON.parse(data.allContentfulSeiteBeBoKonzept.edges[0].node.introText.raw)
+	const textJSON = JSON.parse(data.allContentfulSeiteBeBoKonzept.edges[0].node.text.raw)
+	const logo = data.allContentfulSeiteBeBoKonzept.edges[0].node.logo.file.url
 	const logoTitle = data.allContentfulSeiteBeBoKonzept.edges[0].node.logo.title
 	const logoText = data.allContentfulSeiteBeBoKonzept.edges[0].node.logoText
 
+	console.log()
+
 	return (
 		<Layout pageInfo={{ pageName: 'bebo-konzept', pageType: 'subPage' }}>
-			<SEO title={title} pathname={props.location.pathname} />
+			<Seo title={title} pathname={props.location.pathname} />
 			<SubPage data={{ classes: 'bg-gray-200' }}>
 				<Container>{documentToReactComponents(introTextJSON, defaultTextOptions)}</Container>
-				<Container className={Styles.xx__mobileContainer}>
+				<Container>
 					<Row>
 						<Col xs="12" lg="9">
 							<Card className="shadow-dark-sm">
@@ -55,9 +57,9 @@ export default props => {
 						<Col xs="12" lg="3" className="mt-4 mt-lg-0">
 							<Card className="shadow-dark-sm">
 								<Card.Body className={`${Styles.cardBody} ${Styles.logoBox}`}>
-									<img src={logo} alt={logoTitle} class={Styles.image} />
+									<img src={logo} alt={logoTitle} className={Styles.image} />
 									<hr />
-									<p class="h6 text-gray-700 mb-0">{logoText}</p>
+									<p className="h6 text-gray-700 mb-0">{logoText}</p>
 								</Card.Body>
 							</Card>
 						</Col>
@@ -67,3 +69,5 @@ export default props => {
 		</Layout>
 	)
 }
+
+export default Konzept

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import Layout from '../components/layout'
-import SEO from '../components/seo'
+import Seo from '../components/seo'
 import SectionHero from '../components/section-hero'
 import SectionAlert from '../components/section-alert'
 import SectionIntro from '../components/section-intro'
@@ -10,7 +10,7 @@ import SectionInfo from '../components/section-info'
 import SectionMap from '../components/section-map'
 import SectionFAQs from '../components/section-faqs'
 
-export default props => {
+const Index = props => {
 	const data = useStaticQuery(
 		graphql`
 			query {
@@ -29,7 +29,7 @@ export default props => {
 
 	return (
 		<Layout pageInfo={{ pageName: 'startseite', pageType: 'homePage' }}>
-			<SEO title={title} pathname={props.location.pathname} />
+			<Seo title={title} pathname={props.location.pathname} />
 			<SectionHero />
 			<main>
 				<SectionAlert />
@@ -42,3 +42,5 @@ export default props => {
 		</Layout>
 	)
 }
+
+export default Index

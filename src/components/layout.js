@@ -4,10 +4,10 @@ import Footer from '../components/footer'
 import Notification from '../components/notification'
 import CookieBanner from '../components/cookie-banner'
 import ModalDialog from './modal-dialog'
-import Styles from './layout.module.scss'
+import * as Styles from './layout.module.scss'
 import '../scss/default.scss'
 
-export default ({ children, pageInfo }) => {
+const Layout = ({ children, pageInfo }) => {
 	const customClasses = typeof pageInfo.classes !== 'undefined' ? pageInfo.classes : ''
 	return (
 		<div className={Styles.container}>
@@ -22,3 +22,4 @@ export default ({ children, pageInfo }) => {
 		</div>
 	)
 }
+export default Layout

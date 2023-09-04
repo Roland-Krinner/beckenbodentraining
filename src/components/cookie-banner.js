@@ -4,9 +4,9 @@ import { GlobalDispatchContext, GlobalStateContext } from '../context/GlobalCont
 import { useStaticQuery, graphql } from 'gatsby'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { cookieBannerTextOptions } from './format-options'
-import Styles from './cookie-banner.module.scss'
+import * as Styles from './cookie-banner.module.scss'
 
-export default () => {
+const Banner = () => {
 	const data = useStaticQuery(graphql`
 		query {
 			allContentfulKomponenteDatenschutzhinweis {
@@ -14,7 +14,7 @@ export default () => {
 					node {
 						headline
 						text {
-							json
+							raw
 						}
 						buttonText
 					}
@@ -23,7 +23,7 @@ export default () => {
 		}
 	`)
 	const headline = data.allContentfulKomponenteDatenschutzhinweis.edges[0].node.headline
-	const textJSON = data.allContentfulKomponenteDatenschutzhinweis.edges[0].node.text.json
+	const textJSON = JSON.parse(data.allContentfulKomponenteDatenschutzhinweis.edges[0].node.text.raw)
 	const buttonText = data.allContentfulKomponenteDatenschutzhinweis.edges[0].node.buttonText
 
 	const dispatch = useContext(GlobalDispatchContext)
@@ -66,3 +66,5 @@ export default () => {
 		</div>
 	)
 }
+
+export default Banner

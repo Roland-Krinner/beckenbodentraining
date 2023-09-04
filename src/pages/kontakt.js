@@ -3,13 +3,13 @@ import { Container, Row, Col, Card } from 'react-bootstrap'
 import { useStaticQuery, graphql } from 'gatsby'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import Layout from '../components/layout'
-import SEO from '../components/seo'
+import Seo from '../components/seo'
 import { SubPage } from '../components/local-components'
 import ContactForm from '../components/contact-form'
 import { defaultTextOptions, kontaktTextOptions, formTextOptions } from '../components/format-options'
-import Styles from './kontakt.module.scss'
+import * as Styles from './kontakt.module.scss'
 
-export default props => {
+const Kontakt = props => {
 	const data = useStaticQuery(graphql`
 		query {
 			allContentfulSeiteKontakt {
@@ -17,13 +17,13 @@ export default props => {
 					node {
 						title
 						introText {
-							json
+							raw
 						}
 						inhaltText {
-							json
+							raw
 						}
 						formularText {
-							json
+							raw
 						}
 					}
 				}
@@ -31,14 +31,14 @@ export default props => {
 		}
 	`)
 	const title = data.allContentfulSeiteKontakt.edges[0].node.title
-	const introTextJSON = data.allContentfulSeiteKontakt.edges[0].node.introText.json
-	const inahaltTextJSON = data.allContentfulSeiteKontakt.edges[0].node.inhaltText.json
-	const formularTextJSON = data.allContentfulSeiteKontakt.edges[0].node.formularText.json
+	const introTextJSON = JSON.parse(data.allContentfulSeiteKontakt.edges[0].node.introText.raw)
+	const inahaltTextJSON = JSON.parse(data.allContentfulSeiteKontakt.edges[0].node.inhaltText.raw)
+	const formularTextJSON = JSON.parse(data.allContentfulSeiteKontakt.edges[0].node.formularText.raw)
 
 	return (
 		<Layout pageInfo={{ pageName: 'kontakt', pageType: 'subPage' }}>
-			<SEO title={title} pathname={props.location.pathname} />
-			<SubPage data={{ classes: 'bg-gray-200 kontakt-page' }}>
+			<Seo title={title} pathname={props.location.pathname} />
+			 <SubPage data={{ classes: 'bg-gray-200 kontakt-page' }}>
 				<Container className="d-block d-lg-none">
 					<Row>
 						<Col xs={12} lg={6}>
@@ -61,17 +61,19 @@ export default props => {
 							{documentToReactComponents(introTextJSON, defaultTextOptions)}
 							{documentToReactComponents(inahaltTextJSON, kontaktTextOptions)}
 						</Col>
-						<Col xs={12} lg={6} className={`mt-20 mt-lg-0 ${Styles.formCardCol}`}>
+						<Col xs={12} lg={6} className={`mt-20 mt-lg-0`}>
 							<Card className="shadow-dark-sm overflow-hidden">
 								<Card.Body className={`${Styles.cardBody}`}>
 									<div className={`mt-md-5 ${Styles.cardBodyDiv}`}>{documentToReactComponents(formularTextJSON, formTextOptions)}</div>
 									<ContactForm data={{ prefilledText: '', lgCol: '12' }} />
 								</Card.Body>
-							</Card>
+							</Card> 
 						</Col>
 					</Row>
 				</Container>
-			</SubPage>
+			</SubPage> 
 		</Layout>
 	)
 }
+
+export default Kontakt

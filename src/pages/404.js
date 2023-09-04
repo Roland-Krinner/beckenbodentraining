@@ -4,10 +4,10 @@ import { useStaticQuery, graphql } from 'gatsby'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { defaultTextOptions } from '../components/format-options'
 import Layout from '../components/layout'
-import SEO from '../components/seo'
+import Seo from '../components/seo'
 import { SubPage } from '../components/local-components'
 
-export default props => {
+const NotFound = props => {
 	const data = useStaticQuery(graphql`
 		query {
 			allContentfulSeite404 {
@@ -15,7 +15,7 @@ export default props => {
 					node {
 						title
 						text {
-							json
+							raw
 						}
 					}
 				}
@@ -23,11 +23,11 @@ export default props => {
 		}
 	`)
 	const title = data.allContentfulSeite404.edges[0].node.title
-	const textJSON = data.allContentfulSeite404.edges[0].node.text.json
+	const textJSON = JSON.parse(data.allContentfulSeite404.edges[0].node.text.raw)
 
 	return (
 		<Layout pageInfo={{ pageName: 'page-not-found', pageType: 'subPage', classes: 'bg-gray-200' }}>
-			<SEO title={title} pathname={props.location.pathname} />
+			<Seo title={title} pathname={props.location.pathname} />
 			<SubPage data={{ classes: '' }}>
 				<Container>
 					<Row>
@@ -40,3 +40,5 @@ export default props => {
 		</Layout>
 	)
 }
+
+export default NotFound
